@@ -1,0 +1,84 @@
+
+    .mobile-display{
+      display:none;
+    }
+
+    #right-login {
+        /* width: 50%; */
+        border-bottom: 99vh solid #1a2545;
+        border-left:  20vh solid transparent;
+        float: right;
+    }
+
+    .legend-login {
+        margin-top: -48vh;
+        transform: translatey(80vh);
+        margin-left: 25%;
+        margin-right: 25%;
+        min-width: 200px;
+    }
+
+    #topCurve {
+        border: 2px solid white;
+        padding: 10px;
+        border-top-right-radius: 50px;
+    }
+
+    .generic-font-color{
+      color: #1A2545;
+    }
+
+    .activation-area{
+      /* width: 500px; */
+      margin-left: 30%;
+      margin-right: 30%;
+      margin-top: 100px;
+      margin-bottom: 100px;
+    }
+
+
+    @media (max-width: 767px) {
+      .legend-login {
+        margin-top: -68vh;
+      }
+
+      .hidden-mobile {
+        display: none;
+      }
+      .mobile-display{
+        display:contents;
+        font-size: small;
+        color: white;
+      }
+    }
+
+    @media screen and (max-width: 668px) {
+      .legend-login {
+        margin-left: -10%;
+
+      }
+    }
+
+    @media screen and (max-width: 500px) {
+      .legend-login {
+        transform: translatey(80vh);
+        margin-left: -25%;
+        min-width: 200px;
+        margin-right:10 !important;
+      }
+    }
+
+
+    .login-button {
+      background-color: #ACAEB4;
+      border-color: #ACAEB4;
+      color: #fff;
+      border-radius: 20px;
+      padding: 5px;
+    }
+
+    .rounded-input{
+      background-color: #ACAEB4;
+      border-radius: 30px;
+      border-style: solid;
+    }

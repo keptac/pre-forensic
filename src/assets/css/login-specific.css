@@ -1,0 +1,7 @@
+#right {
+    width: 60%;
+    border-bottom: 99vh solid #1c2455;
+    border-left:  20vh solid transparent;
+    float: right;
+    /* margin-left: -300px; */
+}

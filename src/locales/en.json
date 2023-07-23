@@ -1,0 +1,82 @@
+{
+    "navbar": {
+        "search": {
+            "text": "Search..."
+        },
+        "dropdown": {
+            "user": {
+                "text": "Kelvin",
+                "list": {
+                    "profile": "Profile",
+                    "logout": "Logout"
+                }
+            }
+        }
+    },
+    "menuitems": {
+        "menu": {
+            "text": "Menu"
+        },
+
+        "dashboard": {
+            "text": "Summary",
+            "badge": "1"
+        },
+        "inputdata": {
+            "text": "Input Data",
+            "badge": "2"
+        },
+        "keywords": {
+            "text": "Keywords & Anomalies",
+            "badge": "3"
+        },
+        "risks": {
+            "text": "Behavioural Risks",
+            "badge": "4"
+        },
+        "relationships": {
+            "text": "Relationships",
+            "badge": "5"
+        },
+        "locations": {
+            "text": "Locations",
+            "badge": "3"
+        },
+        "entities": {
+            "text": "Entities",
+            "badge": "3"
+        },
+        "tagged": {
+            "text": "Tagged Data",
+            "badge": "3"
+        },
+        "timeline": {
+            "text": "Timeline of key Data",
+            "badge": "3"
+        },
+        "recommendations": {
+            "text": "Recommendations",
+            "badge": "3"
+        },
+
+        "usermanagement": {
+            "text": "User Management",
+            "list": {
+                "registeruser": "User Registration",
+                "usermanagement": "View Users"
+            }
+        },
+
+        
+
+        "charts": {
+            "text": "Charts",
+            "list": {
+                "apex": "Apex Chart",
+                "chartjs": "Chartjs Chart",
+                "chartist": "Chartist Chart",
+                "echart": "E Chart"
+            }
+        }
+    }
+}
