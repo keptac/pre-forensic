@@ -1,7 +1,7 @@
 <script>
 import Layout from "../../layouts/main";
 import PageHeader from "@/components/page-header";
-import RisksTable from './risksTable';
+import KeywordsTable from './keywordsTable';
 
 
 export default {
@@ -9,7 +9,7 @@ export default {
     title: "",
     meta: [{ name: "description" }]
   },
-  components: { Layout, PageHeader, RisksTable },
+  components: { Layout, PageHeader, KeywordsTable },
   data() {
     return {
       title: "",
@@ -26,7 +26,7 @@ export default {
     <PageHeader :title="title" :items="items" />
       <div class="row">
         <div class="col-lg-12 ">
-            <RisksTable/>
+            <KeywordsTable/>
         </div>
     </div>
   </Layout>

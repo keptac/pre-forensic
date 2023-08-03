@@ -1,6 +1,6 @@
 <script>
 /**
- * Transactions component
+ * InputData component
  */
 
 import { reportService } from '../../../services/report.service';
@@ -13,53 +13,40 @@ import {
 export default {
   data() {
     return {
-      transactionData: [],
+      inputData: [],
       variableObject:{},
       modalTitle:"",
       totalRows: 1,
       currentPage: 1,
       perPage: 5,
-      pageOptions: [5, 10, 25, 50],
+      pageOptions: [5, 10, 25],
       filter: null,
       filterOn: [],
-      shopList:[],
-      sortBy: "transactionId",
+      externalData:[],
+      sortBy: "dateInitiated",
       sortDesc: false,
       fields: [
 
-        // { key: "transactionId", sortable: true, label: " ID" },
-        { key: "date", sortable: true, label:"Dates" },
-        { key: "senderDetails",sortable: true, label: "Sender Name" },
-        { key: "senderDetails.nationalId",sortable: true, label: "Sender ID" },
-        { key: "receiverDetails", sortable: true, label: "Receiver Name" },
-        { key: "receiverNationalId", sortable: true, label: "Receiver ID" },
-        { key: "transactionDetails.amount", sortable: true, label: "Amount" },
-        { key: "transactionDetails.purposeOfFunds", sortable: true, label: "Purpose" },
-        // { key: "depositPayOutBranch", sortable: true, label: "Deposit Payout Branch" },
-        // { key: "withdrawalPayOutBranch", sortable: true, label: "Preferred Payout Branch" },
-        // { key: "preferredWithdrawalPayOutBranch", sortable: true, label: "Withdrawal Payout Branch" },
-        // { key: "payoutBranches", sortable: false ,label: "Payout Branches" },
-        { key: "status", sortable: true, label: "Status" },
-        { key: "commissions", sortable: false },
+        { key: "fileName",sortable: true, label: "File Name" },
+        { key: "type",sortable: true, label: "Type" },
+        { key: "size", sortable: true, label: "File Size" },
+        { key: "createby", sortable: true, label: "Created By " },
+        { key: "dateInitiated", sortable: true, label:"Date created" },
+        { key: "dateModified", sortable: true, label:"Date modified" },
+        { key: "dateAccessed", sortable: true, label:"Date accessed" },
       ],
 
       columns: [
-        { field: "transactionId", label: " ID" },
-        { field: "dates.dateInitiated", label:"Date" },
-        { field: "senderDetails.lastName",label: "Sender Last Name" },
-        { field: "senderDetails.firstName",label: "Sender First Name" },
-        { field: "senderDetails.nationalId",label: "Sender National Id" },
-        { field: "receiverDetails.lastName",  label: "Receiver Last Name" },
-        { field: "receiverDetails.firstName",  label: "Receiver First Name" },
-        { field: "receiverNationalId",  label: "Receiver Last Name" },
-        { field: "transactionDetails.amount", label: "Amount" },
-        { field: "transactionDetails.purposeOfFunds", label: "Purpose" },
-        { field: "payoutBranches.depositPayOutBranch",label: "Payout Branches" },
-        { field: "transactionDetails.transactionStatus", label: "Status" }
+        { field: "fileName", label: " File Name" },
+        { field: "type",label: "Type" },
+        { field: "size",label: "File Size" },
+        { field: "createby",label: "Created By" },
+        { field: "dateInitiated", label:"Date created" },
+        { field: "dateModified", label:"Date modified" },
+        { field: "dateAccessed", label:"Date accessed" },
       ],
 
       form: {
-        shopId:"",
         startDate: "",
         endDate:""
       },
@@ -67,8 +54,8 @@ export default {
   },
 
   created() {
-    this.loadAllTransactions(),
-    this.loadAllShops()
+    this.loadAllInputData(),
+    this.loadAllExternalData()
   },
 
   computed: {
@@ -76,7 +63,7 @@ export default {
      * Total no. of records
      */
     rows() {
-      return this.transactionData.length;
+      return this.inputData.length;
     },
 
     notification() {
@@ -85,7 +72,7 @@ export default {
   },
   mounted() {
     // Set the initial number of items
-    this.totalRows = this.transactionData.length;
+    this.totalRows = this.inputData.length;
   },
   methods: {
     /**
@@ -100,11 +87,11 @@ export default {
       this.currentPage = 1;
     },
 
-    async loadAllShops() {
+    async loadAllExternalData() {
             try {
-                await shopService.getAllShops().then(response=>{
+                await shopService.getAllExternalData().then(response=>{
                     if(response.responseBody.length>0){
-                      this.shopList = response.responseBody;
+                      this.externalData = response.responseBody;
                     }
                 });
             } catch (error) {
@@ -112,11 +99,11 @@ export default {
             }
         },
 
-    async loadAllTransactions() {
+    async loadAllInputData() {
         try {
-          await reportService.getGlobalTransactionReport().then(response=>{
+          await reportService.getGlobalInputDataReport().then(response=>{
             if(response.responseBody.length>0){
-                this.transactionData = response.responseBody;
+                this.inputData = response.responseBody;
               }
           });
         } catch (error) {
@@ -124,15 +111,15 @@ export default {
         }
     },
 
-    searchTransactions() {
+    searchInputData() {
       this.submitted = true;
-      reportService.searchTransactions(this.form).then(result=>{
+      reportService.searchInputData(this.form).then(result=>{
         if(result.status=="SUCCESS"){
           this.submitted = false;
           this.form = Object.assign({}, this.form);
-          this.transactionData = [];
+          this.inputData = [];
           console.log(result.responseBody);
-          this.transactionData = result.responseBody
+          this.inputData = result.responseBody
         }
       });
     },
@@ -147,7 +134,8 @@ export default {
 
 <template>
   <div class="card">
-    <b-modal id="user-modal-standard" :title="modalTitle" title-class="font-18" hide-footer>
+
+    <b-modal id="filename-modal-standard" :title="modalTitle" title-class="font-18" hide-footer>
           <div class="row">
             <div class="col-xl-12">
                 <p class="mb-2 text-truncate">
@@ -162,42 +150,7 @@ export default {
               </div>
             </div>
     </b-modal>
-    <b-modal id="commissions-modal-standard" :title="modalTitle" title-class="font-18" hide-footer>
-          <div class="row">
-            <div class="col-xl-12">
-              <p class="mb-2 text-truncate">
-                  <i class="mdi mdi-circle text-primary font-size-10 mr-1"></i>Commission Status: {{variableObject.commissionStatus}}
-                </p>
-                <p class="mb-2 text-truncate">
-                  <i class="mdi mdi-circle text-primary font-size-10 mr-1"></i>Deposit Commission : $ {{variableObject.depositCommission}}
-                </p>
-                <p class="mb-2 text-truncate">
-                  <i class="mdi mdi-circle text-primary font-size-10 mr-1"></i>Deposit Commission Percentage: {{variableObject.depositCommissionPercentage}} %
-                </p>
-                <p class="mb-2 text-truncate">
-                  <i class="mdi mdi-circle text-primary font-size-10 mr-1"></i>Withdrawal Commission: $ {{variableObject.withdrawalCommission}}
-                </p>
-                <p class="mb-2 text-truncate">
-                  <i class="mdi mdi-circle text-primary font-size-10 mr-1"></i>Withdrawal Commission Percentage: {{variableObject.withdrawalCommissionPercentage}} %
-                </p>
-              </div>
-            </div>
-    </b-modal>
-    <b-modal id="payoutBranches-modal-standard" :title="modalTitle" title-class="font-18" hide-footer>
-          <div class="row">
-            <div class="col-xl-12">
-              <p class="mb-2 text-truncate">
-                  <i class="mdi mdi-circle text-primary font-size-10 mr-1"></i>Deposit Branch: {{variableObject.depositPayOutBranch}}
-                </p>
-                <p class="mb-2 text-truncate">
-                  <i class="mdi mdi-circle text-primary font-size-10 mr-1"></i>Preferred Collection Branch : {{variableObject.preferredWithdrawalPayOutBranch}}
-                </p>
-                <p class="mb-2 text-truncate">
-                  <i class="mdi mdi-circle text-primary font-size-10 mr-1"></i>Withdrawal Branch: {{variableObject.withdrawalPayOutBranch}}
-                </p> 
-              </div>
-            </div>
-    </b-modal>
+
     <div class="card-body">
       <b-dropdown right toggle-class="arrow-none card-drop" class="float-right" variant="white">
         <template v-slot:button-content>
@@ -207,11 +160,11 @@ export default {
         <b-dropdown-item>
           <vue-excel-xlsx
               class="btn"
-              :data="transactionData"
+              :data="inputData"
               :columns="columns"
-              :file-name="'Transactions Report'"
+              :file-name="'InputData Report'"
               :file-type="'xlsx'"
-              :sheet-name="'latest transactions'"
+              :sheet-name="''"
               >
               Export Report
           </vue-excel-xlsx>
@@ -220,7 +173,7 @@ export default {
       
       </b-dropdown>
 
-      <h4 class="card-title mb-4">Latest Transactions</h4>
+      <h4 class="card-title mb-4"></h4>
       <div class="row mt-4">
         <div class="col-sm-12 col-md-3">
           <div id="tickets-table_length" class="dataTables_length">
@@ -235,13 +188,7 @@ export default {
         <div class="col-sm-12 col-md-6">
 
           <div id="tickets-table_filter" class="row mb-3">
-            <form  @submit.prevent="searchTransactions">
-              <label class="d-inline-flex align-items-center">
-                Branch
-                  <select class="form-control form-control-sm ml-2" v-model="form.shopId">
-                      <option  v-for="(shop, index) in shopList" :value="shop.id" :key="index" >{{shop.name}}</option>
-                  </select>
-              </label>
+            <form  @submit.prevent="searchInputData">
               <label class=" ml-3  d-inline-flex align-items-center">
                 Start 
                 <input
@@ -282,7 +229,7 @@ export default {
       </div>
       <div class="table-responsive">
         <b-table
-          :items="transactionData"
+          :items="inputData"
           :fields="fields"
           responsive="sm"
           :per-page="perPage"
@@ -311,52 +258,18 @@ export default {
           <!-- <template v-slot:cell(receiverDetails)="row">
             <div>{{row.value.receiverFirstName + ' ' + row.value.receiverDetails}}</div>
           </template> -->
-          <template v-slot:cell(senderDetails)="row">
+          <template v-slot:cell(fileName)="row">
               <a
-                @click="storeState(row.item.senderDetails, 'Sender Details')"
+                @click="storeState(row.item, 'File Details')"
                 href="javascript:void(0);"
                 class="mr-3 text-primary"
                 v-b-tooltip.hover
                 title="Click to view"
               >
-                <div v-b-modal.user-modal-standard>{{row.value.firstName + ' ' + row.value.lastName}}</div>
+                <div v-b-modal.filename-modal-standard>{{row.value.fileName}}</div>
               </a>
           </template>
-          <template v-slot:cell(receiverDetails)="row">
-              <a
-                @click="storeState(row.item.receiverDetails, 'Receiver Details')"
-                href="javascript:void(0);"
-                class="mr-3 text-primary"
-                v-b-tooltip.hover
-                title="Click to view"
-              >
-                <div v-b-modal.user-modal-standard>{{row.value.firstName + ' ' + row.value.lastName}}</div>
-              </a>
-          </template>
-          <template v-slot:cell(commissions)="row">
-              <a
-                @click="storeState(row.item.commissions, 'Commission Details')"
-                href="javascript:void(0);"
-                class="mr-3 text-primary"
-                v-b-tooltip.hover
-                title="Click to view more"
-              >
-                <a v-b-modal.commissions-modal-standard><i class="mdi mdi-eye font-size-18" ></i> 
-                View Commissions</a>
-              </a>
-          </template>
-          <template v-slot:cell(payoutBranches)="row">
-              <a
-                @click="storeState(row.item, 'Payout Branches')"
-                href="javascript:void(0);"
-                class="mr-3 text-primary"
-                v-b-tooltip.hover
-                title="Click to view more"
-              >
-               <a v-b-modal.payoutBranches-modal-standard> <i  class="mdi mdi-eye font-size-18" ></i>View Payout Branches</a>
 
-              </a>
-          </template>
         </b-table>
       </div>
       <div class="row">

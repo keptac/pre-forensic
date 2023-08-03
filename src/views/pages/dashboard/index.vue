@@ -5,7 +5,7 @@ import router from '../../../router/index'
 
 import Stat from "./widget";
 import RevenueAnalytics from "./revenue";
-import RemittanceAnalytics from "./remittance-analytics";
+// import RemittanceAnalytics from "./remittance-analytics";
 import BusinessConditions from "./businessConditions";
 
 
@@ -18,7 +18,7 @@ export default {
     PageHeader,
     Stat,
     RevenueAnalytics,
-    RemittanceAnalytics,
+    // RemittanceAnalytics,
     BusinessConditions
   },
   data() {
@@ -49,12 +49,11 @@ export default {
   <Layout>
     <PageHeader :title="title" :items="items" />
     <div class="row">
-      <div class="col-xl-8">
+      <div class="col-xl-9">
         <Stat />
         <RevenueAnalytics />
       </div>
-      <div class="col-xl-4">
-        <RemittanceAnalytics />
+      <div class="col-xl-3">
         <BusinessConditions />
       </div>
     </div>

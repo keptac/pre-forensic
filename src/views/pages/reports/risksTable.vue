@@ -195,7 +195,7 @@ export default {
                         :file-type="'xlsx'"
                         :sheet-name="'balances'"
                         >
-                        Export Balances
+                        Export
                     </vue-excel-xlsx>
                   </b-dropdown-item>
                   <!-- item-->
@@ -264,8 +264,7 @@ export default {
 
     <div class="card-body">
       
-
-      <h4 class="card-title mb-4">Latest Transactions</h4>
+      <h4 class="card-title mb-4"></h4>
       <div class="row mt-4">
         
         <div class="col-sm-12 col-md-4">
@@ -305,7 +304,7 @@ export default {
                         :file-type="'xlsx'"
                         :sheet-name="'All Accounts'"
                         >
-                        Export Balances
+                        Export
                     </vue-excel-xlsx>
                   </b-dropdown-item>
                   <!-- item-->

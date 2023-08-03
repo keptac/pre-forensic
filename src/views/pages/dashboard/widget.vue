@@ -14,21 +14,27 @@ export default {
       shopId:  JSON.parse(localStorage.getItem('user')).shopId,
       statData: [
         {
-          title: "Total Deposits ",
+          title: "Total ",
           icon: "ri-money-dollar-circle-line",
-          value: "$ 0.00",
+          value: " 0.00",
           subvalue: "0% "
         },
         {
-          title: "Total Withdrawals",
+          title: "Total",
           icon: "mdi mdi-account-cash-outline",
-          value: "$ 0.00",
+          value: " 0.00",
           subvalue: " 0% "
         },
         {
-          title: "Total Revenue",
+          title: "Total",
           icon: "mdi mdi-finance",
-          value: "$ 0.00",
+          value: " 0.00",
+          subvalue: " 0% "
+        },
+        {
+          title: "Total",
+          icon: "mdi mdi-finance",
+          value: " 0.00",
           subvalue: " 0% "
         }
       ]
@@ -76,7 +82,7 @@ export default {
 
 <template>
   <div class="row">
-    <div class="col-md-4" v-for="(data, index) in statData" :key="index">
+    <div class="col-md-3" v-for="(data, index) in statData" :key="index">
       <div class="card">
         <div class="card-body">
           <div class="media">
