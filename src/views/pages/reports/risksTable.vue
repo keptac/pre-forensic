@@ -13,7 +13,12 @@ export default {
   data() {
     return {
       riskData: [
-        { "id":"BR1","date":"08/08/2023", "from_to":"From/To", "type": "Type(Email/Chat)", "description": "Risk Description" },
+        { "id":"BR1",
+          "date":"08/08/2023", 
+          "from_to":"From/To", 
+          "type": "Type(Email/Chat)", 
+          "description": "Risk Description" 
+        },
       ],
       expandedRisksData: [],
       variableObject:{},

@@ -181,6 +181,14 @@ export default [{
         component: () =>
             import ('../views/pages/reports/recommendations')
     },
+
+    {
+        path: '/reports/timeline',
+        name: 'Timelines',
+        meta: { authRequired: true },
+        component: () =>
+            import ('../views/pages/reports/timeline')
+    },
     
 
         //USER MANAGEMENT

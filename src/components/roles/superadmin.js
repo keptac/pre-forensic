@@ -58,7 +58,7 @@ export const superAdminMenuItems = [{
     id: 2,
     title: 'menuitems.timeline.text',
     icon: 'ri-dashboard-line',
-    link: '/'
+    link: '/reports/timeline'
 },
 {
     id: 2,
