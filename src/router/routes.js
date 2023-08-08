@@ -144,10 +144,18 @@ export default [{
 
     {
         path: '/reports/relationships',
-        name: 'Behavioural Risk',
+        name: 'Relationships',
         meta: { authRequired: true },
         component: () =>
             import ('../views/pages/reports/relationships')
+    },
+
+    {
+        path: '/reports/entities',
+        name: 'Entities',
+        meta: { authRequired: true },
+        component: () =>
+            import ('../views/pages/reports/entities')
     },
 
     {

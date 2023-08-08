@@ -40,7 +40,7 @@ export const superAdminMenuItems = [{
     id: 2,
     title: 'menuitems.entities.text',
     icon: 'ri-dashboard-line',
-    link: '/'
+    link: '/reports/entities'
 },
 {
     id: 2,

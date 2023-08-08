@@ -13,7 +13,12 @@ export default {
   data() {
     return {
       relationshipsData: [
-        { "id":"BR1","date":"08/08/2023", "fromTo":"From/To", "type": "Type(Email/Chat)", "description": "Risk Description" },
+        { "id":"BR1",
+          "businessName":"Company 1", 
+          "registrationNumber":"XYZ 789", 
+          "supplierNumber": "ABC 123", 
+          "interactionCount": 20
+        },
       ],
       expandedRelationshipsData: [],
       variableObject:{},
@@ -41,36 +46,35 @@ export default {
       sortDesc: false,
       fields: [
         { key: "id", sortable: true, label: "Identifier" },
-        { key: "date", sortable: true, label: "Date Range" },
-        { key: "internalExternal",sortable: true, label: "Internal/External" },
-        { key: "companyRegNumber",sortable: true, label: "ID/Company Reg Number" },
+        { key: "businessName", sortable: true, label: "Business Name" },
+        { key: "registrationNumber",sortable: true, label: "Reg Number" },
         { key: "supplierNumber",sortable: true, label: "Supplier Number" },
-        { key: "intercationCount",sortable: true, label: "Interation Count" },
+        { key: "interactionCount",sortable: true, label: "Interation Count" },
       ],
 
       columns: [
-        { field: "date", label: "Date" },
-        { field: "internal_external", label: "From/To" },
-        { field: "companyRegNumber", label: "Type(Email/Chat)" },
-        { field: "supplierNumber", label: "Risk Description" },
+        { field: "id", label: "Identifier" },
+        { field: "businessName", label: "Business Name" },
+        { field: "registrationNumber", label:  "Reg Number" },
+        { field: "supplierNumber", label: "Supplier Number" },
+        { field: "interactionCount", label: "Interation Count" },
       ],
 
 
       expandedFields: [
-      { key: "id", sortable: true, label: "Identifier" },
-        { key: "date", sortable: true, label: "Date Range" },
-        { key: "internal_external",sortable: true, label: "Internal/External" },
-        { key: "companyRegNumber",sortable: true, label: "ID/Company Reg Number" },
+        { key: "id", sortable: true, label: "Identifier" },
+        { key: "businessName", sortable: true, label: "Business Name" },
+        { key: "registrationNumber",sortable: true, label: "Reg Number" },
         { key: "supplierNumber",sortable: true, label: "Supplier Number" },
-        { key: "intercationCount",sortable: true, label: "Interation Count" },
+        { key: "interactionCount",sortable: true, label: "Interation Count" },
     ],
 
       mcolumns: [
-      { field: "date", label: "Date" },
-        { field: "internal_external", label: "From/To" },
-        { field: "companyRegNumber", label: "Type(Email/Chat)" },
-        { field: "supplierNumber", label: "Risk Description" },
-        { field: "intercationCount", label: "Interation Count" },
+        { field: "id", label: "Identifier" },
+        { field: "businessName", label: "Business Name" },
+        { field: "registrationNumber", label:  "Reg Number" },
+        { field: "supplierNumber", label: "Supplier Number" },
+        { field: "interactionCount", label: "Interation Count" },
       ],
       
     };
@@ -152,9 +156,13 @@ export default {
         }
 
         this.expandedRelationshipsData =[
-        { "id":"BR1","date":"08/08/2023", "fromTo":"From/To", "type": "Type(Email/Chat)", "description": "Risk Description" },
-    
-      ]
+          { "id":"BR1",
+            "businessName":"Company 1", 
+            "registrationNumber":"XYZ 789", 
+            "supplierNumber": "ABC 123", 
+            "interactionCount": 20
+          },
+        ]
 
     },
   }
@@ -164,7 +172,7 @@ export default {
 <template>
 
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-6">
       <div class="card">
         <div class="card-body">
           <div class="row mt-4"> 
@@ -205,15 +213,15 @@ export default {
               :filter-included-fields="filterOn"
               @filtered="onFiltered"
             >
-              <template v-slot:cell(id)="row">
+              <template v-slot:cell(interactionCount)="row">
                   <a
-                    @click="expandKeyRelationship(row.item.id, row.item.id)"
+                    @click="expandKeyRelationship(row.item.id, row.item.interactionCount)"
                     href="javascript:void(0);"
                     class="mr-3 text-primary"
                     v-b-tooltip.hover
                     title="Click to view"
                   >
-                 {{row.item.id}}
+                 {{row.item.interactionCount}}
 
                   </a>
               </template>

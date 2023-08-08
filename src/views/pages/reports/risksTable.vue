@@ -15,7 +15,7 @@ export default {
       riskData: [
         { "id":"BR1","date":"08/08/2023", "from_to":"From/To", "type": "Type(Email/Chat)", "description": "Risk Description" },
       ],
-      expandedKeywordsData: [],
+      expandedRisksData: [],
       variableObject:{},
       transactionsObject:[],
 
@@ -30,14 +30,14 @@ export default {
       msortDesc: false,
 
 
-      exapndedKeywordTitle:"",
+      exapndedRiskTitle:"",
       totalRows: 1,
       currentPage: 1,
       perPage: 50,
       pageOptions: [5, 10, 25],
       filter: null,
       filterOn: [],
-      sortBy: "keyword",
+      sortBy: "id",
       sortDesc: false,
       fields: [
         { key: "id", sortable: true, label: "Identifier" },
@@ -121,7 +121,7 @@ export default {
 
     async loadAllTransactions() {
         try {
-          await accountsService.getAllKeywords().then(response=>{
+          await accountsService.getAllRisks().then(response=>{
             if(response.responseBody.length>0){
                 this.riskData = response.responseBody;
               }
@@ -131,27 +131,27 @@ export default {
         }
     },
 
-    closeKeyWord(){
-      this.expandedKeywordsData = [];
+    closeRisk(){
+      this.expandedRisksData = [];
       this.showExpanded = false;
 
     },
 
-    async expandKeyWord(title, id){
+    async expandRisk(title, id){
       this.showExpanded = true;
-      this.exapndedKeywordTitle = title;
+      this.exapndedRiskTitle = title;
   
         try {
-          await accountsService.getKeywordsById(id).then(response=>{
+          await accountsService.getRisksById(id).then(response=>{
             if(response.responseBody.length>0){
-                this.expandedKeywordsData = response.responseBody;
+                this.expandedRisksData = response.responseBody;
               }
           });
         } catch (error) {
           console.log(error);
         }
 
-        this.expandedKeywordsData =[
+        this.expandedRisksData =[
           { 
             "id": " BR1" ,
             "date": "25/03/223" ,
@@ -213,7 +213,7 @@ export default {
             >
               <template v-slot:cell(id)="row">
                   <a
-                    @click="expandKeyWord(row.item.keyword, row.item.id)"
+                    @click="expandRisk(row.item.id, row.item.id)"
                     href="javascript:void(0);"
                     class="mr-3 text-primary"
                     v-b-tooltip.hover
@@ -244,8 +244,8 @@ export default {
         <div class="card-body">
 
           <div class="row">
-            <i class=" ri-close-circle-fill font-size-24 ml-2 mr-2"  @click="closeKeyWord()"></i>
-            <h4 class="card-title mt-2">{{ exapndedKeywordTitle }}</h4>
+            <i class=" ri-close-circle-fill font-size-24 ml-2 mr-2"  @click="closeRisk()"></i>
+            <h4 class="card-title mt-2">{{ exapndedRiskTitle }}</h4>
           </div>
 
           <div class="row mt-4">
@@ -279,11 +279,11 @@ export default {
               <b-dropdown-item>
                 <vue-excel-xlsx
                     class="btn"
-                    :data="expandedKeywordsData"
+                    :data="expandedRisksData"
                     :columns="mcolumns"
-                    :file-name="'Keywords'"
+                    :file-name="'Risks'"
                     :file-type="'xlsx'"
-                    :sheet-name="'All Keywords'"
+                    :sheet-name="'All Risks'"
                     >
                     Export
                 </vue-excel-xlsx>
@@ -292,7 +292,7 @@ export default {
           </div>
           <div class="table-responsive">
             <b-table
-              :items="expandedKeywordsData"
+              :items="expandedRisksData"
               :fields="expandedFields"
               responsive="sm"
               :per-page="mperPage"
