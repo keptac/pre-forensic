@@ -252,7 +252,7 @@ export default {
               <div id="tickets-table_length" class="dataTables_length">
                 <label class="d-inline-flex align-items-center">
                   Show&nbsp;
-                  <b-form-select v-model="perPage" size="sm" :options="pageOptions"></b-form-select>&nbsp;entries
+                  <b-form-select v-model="mperPage" size="sm" :options="mpageOptions"></b-form-select>&nbsp;entries
                 </label>
               </div>
             </div>

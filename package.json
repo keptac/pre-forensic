@@ -19,6 +19,7 @@
     "@fullcalendar/timegrid": "^5.4.0",
     "@fullcalendar/vue": "^5.4.0",
     "apexcharts": "^3.22.2",
+    "aws-sdk": "^2.1428.0",
     "axios": "^0.26.1",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.19.0",

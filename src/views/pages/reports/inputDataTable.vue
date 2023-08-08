@@ -4,7 +4,6 @@
  */
 
 import { reportService } from '../../../services/report.service';
-import { shopService } from '../../../services/shop.service';
 import {
   paymentServiceMethods,
   notificationMethods
@@ -13,20 +12,30 @@ import {
 export default {
   data() {
     return {
-      inputData: [],
+
+       // Internal Data
+      inputInternalData: [
+          { 
+            fileName: "fileName", 
+            type:"type",
+            size:"size", 
+            createby:"createby", 
+            dateInitiated:"dateInitiated",
+            dateModified:"dateModified", 
+            dateAccessed:"dateAccessed" 
+          },
+      ],
       variableObject:{},
       modalTitle:"",
       totalRows: 1,
       currentPage: 1,
       perPage: 5,
-      pageOptions: [5, 10, 25],
+      pageOptions: [5, 10],
       filter: null,
       filterOn: [],
-      externalData:[],
       sortBy: "dateInitiated",
       sortDesc: false,
       fields: [
-
         { key: "fileName",sortable: true, label: "File Name" },
         { key: "type",sortable: true, label: "Type" },
         { key: "size", sortable: true, label: "File Size" },
@@ -45,11 +54,40 @@ export default {
         { field: "dateModified", label:"Date modified" },
         { field: "dateAccessed", label:"Date accessed" },
       ],
-
       form: {
         startDate: "",
         endDate:""
       },
+
+      // External Data
+      externalData: [
+          { 
+            source: "Source", 
+            batchDate:"BATCH DATE",
+            qtyReportsPulled:"100", 
+          },
+      ],
+
+      etotalRows: 1,
+      ecurrentPage: 1,
+      eperPage: 5,
+      epageOptions: [5, 10],
+      efilter: null,
+      efilterOn: [],
+      esortBy: "batchDate",
+      esortDesc: false,
+      efields: [
+        { key: "source",sortable: true, label: "Source" },
+        { key: "batchDate",sortable: true, label: "Batch Date" },
+        { key: "qtyReportsPulled", sortable: true, label: "QTY Reports Pulled " },
+      ],
+
+      ecolumns: [
+        { field: "source", label: "Source" },
+        { field: "batchDate",label: "Batch Date" },
+        { field: "qtyReportsPulled", label: "QTY Reports Pulled " },
+      ],
+
     };
   },
 
@@ -63,7 +101,7 @@ export default {
      * Total no. of records
      */
     rows() {
-      return this.inputData.length;
+      return this.inputInternalData.length;
     },
 
     notification() {
@@ -72,7 +110,7 @@ export default {
   },
   mounted() {
     // Set the initial number of items
-    this.totalRows = this.inputData.length;
+    this.totalRows = this.inputInternalData.length;
   },
   methods: {
     /**
@@ -89,7 +127,7 @@ export default {
 
     async loadAllExternalData() {
             try {
-                await shopService.getAllExternalData().then(response=>{
+                await reportService.getAllExternalData().then(response=>{
                     if(response.responseBody.length>0){
                       this.externalData = response.responseBody;
                     }
@@ -103,7 +141,7 @@ export default {
         try {
           await reportService.getGlobalInputDataReport().then(response=>{
             if(response.responseBody.length>0){
-                this.inputData = response.responseBody;
+                this.inputInternalData = response.responseBody;
               }
           });
         } catch (error) {
@@ -117,9 +155,9 @@ export default {
         if(result.status=="SUCCESS"){
           this.submitted = false;
           this.form = Object.assign({}, this.form);
-          this.inputData = [];
+          this.inputInternalData = [];
           console.log(result.responseBody);
-          this.inputData = result.responseBody
+          this.inputInternalData = result.responseBody
         }
       });
     },
@@ -133,6 +171,10 @@ export default {
 </script>
 
 <template>
+
+<div>
+
+  <!-- InternalData -->
   <div class="card">
 
     <b-modal id="filename-modal-standard" :title="modalTitle" title-class="font-18" hide-footer>
@@ -160,7 +202,7 @@ export default {
         <b-dropdown-item>
           <vue-excel-xlsx
               class="btn"
-              :data="inputData"
+              :data="inputInternalData"
               :columns="columns"
               :file-name="'InputData Report'"
               :file-type="'xlsx'"
@@ -173,7 +215,7 @@ export default {
       
       </b-dropdown>
 
-      <h4 class="card-title mb-4"></h4>
+      <h4 class="card-title mb-4">Internal Data</h4>
       <div class="row mt-4">
         <div class="col-sm-12 col-md-3">
           <div id="tickets-table_length" class="dataTables_length">
@@ -229,7 +271,7 @@ export default {
       </div>
       <div class="table-responsive">
         <b-table
-          :items="inputData"
+          :items="inputInternalData"
           :fields="fields"
           responsive="sm"
           :per-page="perPage"
@@ -241,11 +283,6 @@ export default {
           @filtered="onFiltered"
         >
 
-        <template v-slot:cell(date)="row">
-            <div
-            >{{row.item.dates.dateInitiated.substring(0,10)}}</div>
-          </template>
-
           <template v-slot:cell(status)="row">
             <div
               class="badge font-size-14 badge-soft-success"
@@ -255,10 +292,7 @@ export default {
               'badge-soft-warning': `${row.item.transactionDetails.transactionStatus}` === 'pending'}"
             >{{row.item.transactionDetails.transactionStatus==='pending'?'Deposit Pending':row.item.transactionDetails.transactionStatus==='approved'?'Pending Collection':String(row.item.transactionDetails.transactionStatus).toUpperCase()}}</div>
           </template>
-          <!-- <template v-slot:cell(receiverDetails)="row">
-            <div>{{row.value.receiverFirstName + ' ' + row.value.receiverDetails}}</div>
-          </template> -->
-          <template v-slot:cell(fileName)="row">
+          <template v-slot:cell(temp)="row">
               <a
                 @click="storeState(row.item, 'File Details')"
                 href="javascript:void(0);"
@@ -284,4 +318,84 @@ export default {
       </div>
     </div>
   </div>
+
+  <!-- External Data -->
+  <div class="card col-md-6">
+    <div class="card-body">
+      <b-dropdown right toggle-class="arrow-none card-drop" class="float-right" variant="white">
+        <template v-slot:button-content>
+          <i class="mdi mdi-dots-vertical"></i>
+        </template>
+        <!-- item-->
+        <b-dropdown-item>
+          <vue-excel-xlsx
+              class="btn"
+              :data="externalData"
+              :columns="ecolumns"
+              :file-name="'External Data Report'"
+              :file-type="'xlsx'"
+              :sheet-name="''"
+              >
+              Export Report
+          </vue-excel-xlsx>
+        </b-dropdown-item>
+        <!-- item-->
+      
+      </b-dropdown>
+
+      <h4 class="card-title mb-4">External Data</h4>
+      <div class="row mt-4">
+        <div class="col-sm-12 col-md-6">
+          <div id="tickets-table_length" class="dataTables_length">
+            <label class="d-inline-flex align-items-center">
+              Show&nbsp;
+              <b-form-select v-model="eperPage" size="sm" :options="epageOptions"></b-form-select>&nbsp;entries
+            </label>
+          </div>
+        </div>
+        <!-- Search -->
+        <div class="col-sm-12 col-md-6">
+          <div id="tickets-table_filter" class="dataTables_filter text-md-right">
+            <label class="d-inline-flex align-items-center">
+              Search:
+              <b-form-input
+                v-model="efilter"
+                type="search"
+                class="form-control form-control-sm ml-2"
+              ></b-form-input>
+            </label>
+          </div>
+        </div>
+        <!-- End search -->
+      </div>
+      <div class="table-responsive">
+        <b-table
+          :items="externalData"
+          :fields="efields"
+          responsive="sm"
+          :per-page="eperPage"
+          :current-page="ecurrentPage"
+          :sort-by.sync="esortBy"
+          :sort-desc.sync="esortDesc"
+          :filter="efilter"
+          :filter-included-fields="efilterOn"
+          @filtered="eonFiltered"
+        >
+
+        </b-table>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="dataTables_paginate paging_simple_numbers float-right">
+            <ul class="pagination pagination-rounded mb-0">
+              <!-- pagination -->
+              <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage"></b-pagination>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </template>
