@@ -33,6 +33,16 @@ export default {
             </div>
           </div>
         </div>
+        <div class="col-lg-4 ">
+          <div class="card">
+            <div class="card-header">
+              <h5>Overal risk rating</h5>
+            </div>
+            <div class="card-body">
+              <p class="text-center">1.3 / 5</p>
+            </div>
+          </div>
+        </div>
     </div>
   </Layout>
 </template>
