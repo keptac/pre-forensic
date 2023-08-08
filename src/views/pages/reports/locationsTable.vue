@@ -12,15 +12,14 @@ import {
 export default {
   data() {
     return {
-      entitiesData: [
-        { "id":"BR1",
-          "businessName":"Company 1", 
-          "registrationNumber":"XYZ 789", 
-          "supplierNumber": "ABC 123", 
-          "interactionCount": 20
+      locationsData: [
+        { "id":"1",
+          "country":"South Africa", 
+          "city":"Johannesburg ", 
+          "count": 150
         },
       ],
-      expandedEntitiesData: [],
+      expandedLocationsData: [],
       variableObject:{},
       transactionsObject:[],
 
@@ -35,7 +34,7 @@ export default {
       msortDesc: false,
 
 
-      expandedEntityTitle:"",
+      expandedLocationTitle:"",
       totalRows: 1,
       currentPage: 1,
       perPage: 50,
@@ -45,43 +44,39 @@ export default {
       sortBy: "id",
       sortDesc: false,
       fields: [
-        { key: "id", sortable: true, label: "Identifier" },
-        { key: "businessName", sortable: true, label: "Business Name" },
-        { key: "registrationNumber",sortable: true, label: "Reg Number" },
-        { key: "supplierNumber",sortable: true, label: "Supplier Number" },
-        { key: "interactionCount",sortable: true, label: "Interation Count" },
+        { key: "id", sortable: true, label: "id" },
+        { key: "country", sortable: true, label: "Country" },
+        { key: "city",sortable: true, label: "City" },
+        { key: "count",sortable: true, label: "Count" },
       ],
 
       columns: [
-        { field: "id", label: "Identifier" },
-        { field: "businessName", label: "Business Name" },
-        { field: "registrationNumber", label:  "Reg Number" },
-        { field: "supplierNumber", label: "Supplier Number" },
-        { field: "interactionCount", label: "Interation Count" },
+        { field: "id", label: "id" },
+        { field: "country", label: "Country" },
+        { field: "regcityistrationNumber", label:  "City" },
+        { field: "count", label: "Count" },
       ],
 
 
       expandedFields: [
-        { key: "id", sortable: true, label: "Identifier" },
-        { key: "businessName", sortable: true, label: "Business Name" },
-        { key: "registrationNumber",sortable: true, label: "Reg Number" },
-        { key: "supplierNumber",sortable: true, label: "Supplier Number" },
-        { key: "interactionCount",sortable: true, label: "Interation Count" },
+      { key: "id", sortable: true, label: "id" },
+        { key: "country", sortable: true, label: "Country" },
+        { key: "city",sortable: true, label: "City" },
+        { key: "count",sortable: true, label: "Count" },
     ],
 
       mcolumns: [
-        { field: "id", label: "Identifier" },
-        { field: "businessName", label: "Business Name" },
-        { field: "registrationNumber", label:  "Reg Number" },
-        { field: "supplierNumber", label: "Supplier Number" },
-        { field: "interactionCount", label: "Interation Count" },
+      { field: "id", label: "id" },
+        { field: "country", label: "Country" },
+        { field: "regcityistrationNumber", label:  "City" },
+        { field: "count", label: "Count" },
       ],
       
     };
   },
 
   created() {
-    this.loadAllEntities()
+    this.loadAllLocations()
   },
 
   computed: {
@@ -89,7 +84,7 @@ export default {
      * Total no. of records
      */
     rows() {
-      return this.entitiesData.length;
+      return this.locationsData.length;
     },
 
     mrows() {
@@ -102,7 +97,7 @@ export default {
   },
   mounted() {
     // Set the initial number of items
-    this.totalRows = this.entitiesData.length;
+    this.totalRows = this.locationsData.length;
   },
   methods: {
     /**
@@ -123,11 +118,11 @@ export default {
       this.mcurrentPage = 1;
     },
 
-    async loadAllEntities() {
+    async loadAllLocations() {
         try {
-          await accountsService.getAllEntities().then(response=>{
+          await accountsService.getAllLocations().then(response=>{
             if(response.responseBody.length>0){
-                this.entitiesData = response.responseBody;
+                this.locationsData = response.responseBody;
               }
           });
         } catch (error) {
@@ -135,32 +130,31 @@ export default {
         }
     },
 
-    closeEntity(){
-      this.expandedEntitiesData = [];
+    closeLocation(){
+      this.expandedLocationsData = [];
       this.showExpanded = false;
 
     },
 
-    async expandKeyEntity(title, id){
+    async expandKeyLocation(title, id){
       this.showExpanded = true;
-      this.expandedEntityTitle = title;
+      this.expandedLocationTitle = title;
   
         try {
-          await accountsService.getEntitiesByIdentifier(id).then(response=>{
+          await accountsService.getLocationsByIdentifier(id).then(response=>{
             if(response.responseBody.length>0){
-                this.expandedEntitiesData = response.responseBody;
+                this.expandedLocationsData = response.responseBody;
               }
           });
         } catch (error) {
           console.log(error);
         }
 
-        this.expandedEntitiesData =[
-          { "id":"BR1",
-            "businessName":"Company 1", 
-            "registrationNumber":"XYZ 789", 
-            "supplierNumber": "ABC 123", 
-            "interactionCount": 20
+        this.expandedLocationsData =[
+          { "id":"1",
+            "country":"South Africa", 
+            "city":"Johannesburg ", 
+            "count": 150
           },
         ]
 
@@ -202,7 +196,7 @@ export default {
           </div>
           <div class="table-responsive">
             <b-table
-              :items="entitiesData"
+              :items="locationsData"
               :fields="fields"
               responsive="sm"
               :per-page="perPage"
@@ -213,15 +207,15 @@ export default {
               :filter-included-fields="filterOn"
               @filtered="onFiltered"
             >
-              <template v-slot:cell(interactionCount)="row">
+              <template v-slot:cell(count)="row">
                   <a
-                    @click="expandKeyEntity(row.item.id, row.item.interactionCount)"
+                    @click="expandKeyLocation(row.item.id, row.item.count)"
                     href="javascript:void(0);"
                     class="mr-3 text-primary"
                     v-b-tooltip.hover
                     title="Click to view"
                   >
-                 {{row.item.interactionCount}}
+                 {{row.item.count}}
 
                   </a>
               </template>
@@ -246,8 +240,8 @@ export default {
         <div class="card-body">
 
           <div class="row">
-            <i class=" ri-close-circle-fill font-size-24 ml-2 mr-2"  @click="closeEntity()"></i>
-            <h4 class="card-title mt-2">{{ expandedEntityTitle }}</h4>
+            <i class=" ri-close-circle-fill font-size-24 ml-2 mr-2"  @click="closeLocation()"></i>
+            <h4 class="card-title mt-2">{{ expandedLocationTitle }}</h4>
           </div>
 
           <div class="row mt-4">
@@ -281,11 +275,11 @@ export default {
               <b-dropdown-item>
                 <vue-excel-xlsx
                     class="btn"
-                    :data="expandedEntitiesData"
+                    :data="expandedLocationsData"
                     :columns="mcolumns"
-                    :file-name="'Entities'"
+                    :file-name="'Locations'"
                     :file-type="'xlsx'"
-                    :sheet-name="'All Entities'"
+                    :sheet-name="'All Locations'"
                     >
                     Export
                 </vue-excel-xlsx>
@@ -294,7 +288,7 @@ export default {
           </div>
           <div class="table-responsive">
             <b-table
-              :items="expandedEntitiesData"
+              :items="expandedLocationsData"
               :fields="expandedFields"
               responsive="sm"
               :per-page="mperPage"

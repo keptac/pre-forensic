@@ -159,6 +159,14 @@ export default [{
     },
 
     {
+        path: '/reports/locations',
+        name: 'Entities',
+        meta: { authRequired: true },
+        component: () =>
+            import ('../views/pages/reports/locations')
+    },
+
+    {
         path: '/reports/tagged-data',
         name: 'Tagged Data',
         meta: { authRequired: true },

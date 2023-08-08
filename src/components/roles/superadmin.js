@@ -46,7 +46,7 @@ export const superAdminMenuItems = [{
     id: 2,
     title: 'menuitems.locations.text',
     icon: 'ri-dashboard-line',
-    link: '/'
+    link: '/reports/locations'
 },
 {
     id: 2,
