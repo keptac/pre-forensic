@@ -5,21 +5,17 @@ import Stat from "./widget";
 // import RevenueAnalytics from "./revenue";
 // import RemittanceAnalytics from "./remittance-analytics";
 // import BusinessConditions from "./businessConditions";
-import LocationsHeatMap from "../reports/locationsHeatMap"
+import LocationsHeatMap from "../reports/visual_graphs/locationsHeatMap"
 
-
-/**
- * Dashboard component
- */
 export default {
   components: {
     Layout,
     PageHeader,
     Stat,
+    LocationsHeatMap,
     // RevenueAnalytics,
     // RemittanceAnalytics,
-    // BusinessConditions,
-    LocationsHeatMap
+    // BusinessConditions
   },
   data() {
     return {

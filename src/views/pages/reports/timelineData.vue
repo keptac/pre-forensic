@@ -121,8 +121,7 @@ export default {
 
 <template>
 
-  <div class="row">
-    <div class="col-md-4">
+
       <div class="card">
         <div class="card-body">
           <div class="row mt-4"> 
@@ -177,18 +176,4 @@ export default {
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-body">
-          <chartist
-              ratio="ct-chart"
-              :data="simpleLineChart.data"
-              :options="simpleLineChart.options"
-              type="Line"
-            ></chartist>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>

@@ -2,7 +2,7 @@
 import Layout from "../../layouts/main";
 import PageHeader from "@/components/page-header";
 import LocationsTable from './locationsTable';
-import LocationsHeatMap from './locationsHeatMap';
+import LocationsHeatMap from './visual_graphs/locationsHeatMap';
 
 
 export default {
