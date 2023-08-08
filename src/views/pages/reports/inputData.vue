@@ -24,7 +24,7 @@ export default {
 
 <template>
   <Layout>
-    <PageHeader :title="title" :items="items" />
+    <PageHeader class="mt-5 ml-2" :title="title" :items="items" />
       <div class="row">
         <div class="col-lg-12 ">
             <InputDataTable/>

@@ -195,7 +195,7 @@ export default {
 
 <template>
   <Layout>
-    <PageHeader :title="title" :items="items" />
+    <PageHeader class="mt-5 ml-2" :title="title" :items="items" />
     <div class="row">
       <b-modal size="lg" id="modal-standard" title="Edit User" title-class="font-18" hide-footer>
                       <div class="card-body">
