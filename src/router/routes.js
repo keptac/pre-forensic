@@ -173,6 +173,14 @@ export default [{
         component: () =>
             import ('../views/pages/reports/taggedData')
     },
+
+    {
+        path: '/reports/recommendations',
+        name: 'Recommendations',
+        meta: { authRequired: true },
+        component: () =>
+            import ('../views/pages/reports/recommendations')
+    },
     
 
         //USER MANAGEMENT

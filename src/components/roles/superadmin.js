@@ -64,7 +64,7 @@ export const superAdminMenuItems = [{
     id: 2,
     title: 'menuitems.recommendations.text',
     icon: 'ri-dashboard-line',
-    link: '/reports/customers'
+    link: '/reports/recommendations'
 },
 
 
