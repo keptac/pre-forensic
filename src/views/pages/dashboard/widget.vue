@@ -14,28 +14,34 @@ export default {
       shopId:  JSON.parse(localStorage.getItem('user')).shopId,
       statData: [
         {
-          title: "Total ",
+          title: "Date",
+          icon: "mdi mdi-clock-outline",
+          value: new Date().getDate() +"/"+ new Date().getMonth()+"/"+ new Date().getYear()
+        },
+        {
+          title: "Sources ",
           icon: "ri-money-dollar-circle-line",
-          value: " 0.00",
-          subvalue: "0% "
+          value: "0.00"
         },
         {
-          title: "Total",
+          title: "Data size",
           icon: "mdi mdi-account-cash-outline",
-          value: " 0.00",
-          subvalue: " 0% "
+          value: "0.00"
         },
         {
-          title: "Total",
+          title: "Relationships Identified",
           icon: "mdi mdi-finance",
-          value: " 0.00",
-          subvalue: " 0% "
+          value: "0.00"
         },
         {
-          title: "Total",
+          title: "Locations Indentified",
           icon: "mdi mdi-finance",
-          value: " 0.00",
-          subvalue: " 0% "
+          value: "0.00"
+        },
+        {
+          title: "Anomalies Detected",
+          icon: "mdi mdi-finance",
+          value: "0.00"
         }
       ]
     };
@@ -82,27 +88,17 @@ export default {
 
 <template>
   <div class="row">
-    <div class="col-md-3" v-for="(data, index) in statData" :key="index">
+    <div class="col-md-2" v-for="(data, index) in statData" :key="index">
       <div class="card">
         <div class="card-body">
           <div class="media">
             <div class="media-body overflow-hidden">
               <p class="text-truncate font-size-14 mb-2">{{data.title}}</p>
-              <h4 class="mb-0">{{data.value}}</h4>
+              <h5 class="mb-0">{{data.value}}</h5>
             </div>
             <div class="text-primary">
-              <i :class="`${data.icon} font-size-24`"></i>
+              <i :class="`${data.icon} font-size-20`"></i>
             </div>
-          </div>
-        </div>
-
-        <div class="card-body border-top py-3">
-          <div class="text-truncate">
-            <span class="badge badge-soft-success font-size-11">
-              <i class="mdi mdi-menu-up"></i>
-              <!-- {{data.subvalue}} -->
-            </span>
-          
           </div>
         </div>
       </div>

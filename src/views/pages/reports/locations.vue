@@ -2,7 +2,7 @@
 import Layout from "../../layouts/main";
 import PageHeader from "@/components/page-header";
 import LocationsTable from './locationsTable';
-import MapChart from 'vue-map-chart'
+import LocationsHeatMap from './locationsHeatMap';
 
 
 export default {
@@ -10,7 +10,7 @@ export default {
     title: "Locations",
     meta: [{ name: "description" }]
   },
-  components: { Layout, PageHeader, LocationsTable, MapChart },
+  components: { Layout, PageHeader, LocationsTable, LocationsHeatMap },
   data() {
     return {
       title: "Locations",
@@ -37,18 +37,7 @@ export default {
         </div>
 
         <div class="col-lg-7 ">
-          <div class="card">
-            <div class="card-body">
-              <p class="text-center">Locations Visual Map</p>
-              <MapChart
-                :countryData="countryData"
-                highColor="#940101"
-                lowColor="#fccfcf"
-                countryStrokeColor="#909090"
-                defaultCountryFillColor="#dadada"
-                />
-            </div>
-          </div>
+          <LocationsHeatMap/>
         </div>
     </div>
   </Layout>

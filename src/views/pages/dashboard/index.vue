@@ -1,12 +1,11 @@
 <script>
 import Layout from "../../layouts/main";
 import PageHeader from "@/components/page-header";
-import router from '../../../router/index'
-
 import Stat from "./widget";
-import RevenueAnalytics from "./revenue";
+// import RevenueAnalytics from "./revenue";
 // import RemittanceAnalytics from "./remittance-analytics";
-import BusinessConditions from "./businessConditions";
+// import BusinessConditions from "./businessConditions";
+import LocationsHeatMap from "../reports/locationsHeatMap"
 
 
 /**
@@ -17,19 +16,20 @@ export default {
     Layout,
     PageHeader,
     Stat,
-    RevenueAnalytics,
+    // RevenueAnalytics,
     // RemittanceAnalytics,
-    BusinessConditions
+    // BusinessConditions,
+    LocationsHeatMap
   },
   data() {
     return {
-      title: "",
+      title: "Dashboard",
       items: [
         {
           text: ""
         },
         {
-          text: "",
+          text: "Dashboard",
           active: true
         }
       ]
@@ -37,10 +37,6 @@ export default {
   },
 
   created() { 
-    //JSON.parse(localStorage.getItem('accessRights')).some(access => access.groupName === 'Teller Dashboard')
-    if(JSON.parse(localStorage.getItem('accessRights')).some(access => access.groupName === 'Teller Dashboard')){
-      router.push('/teller-dashboard')
-    }
   },
 };
 </script>
@@ -49,12 +45,17 @@ export default {
   <Layout>
     <PageHeader class="mt-5 ml-2" :title="title" :items="items" />
     <div class="row">
-      <div class="col-xl-9">
+      <div class="col-xl-12">
         <Stat />
-        <RevenueAnalytics />
       </div>
-      <div class="col-xl-3">
-        <BusinessConditions />
+
+    </div>
+    <div class="row">
+      <div class="col-xl-5">
+        <LocationsHeatMap />
+      </div>
+      <div class="col-xl-7">
+        <LocationsHeatMap />
       </div>
     </div>
   </Layout>
