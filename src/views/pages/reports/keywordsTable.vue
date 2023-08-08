@@ -69,11 +69,14 @@ export default {
 
       mcolumns: [
         { field: "id", label: " ID" },
-        { field: "amount", label: " Amount" },
-        { field: "currencyType",label: "Currency " },
-        { field: "transactionCategory", label: "Category" },
-        { field: "narration", label: "Narration" },
-        { field: "transactionTimestamp", label:"Date" },
+        { field: "date", label: " date" },
+        { field: "from",label: "from" },
+        { field: "to", label: "to" },
+        { field: "subject", label: "subject" },
+        { field: "keyword", label:"keyword" },
+        { field: "members", label:"members" },
+        { field: "riskRating", label:"riskRating" },
+        { field: "location", label:"location" },
       ],
       
     };
