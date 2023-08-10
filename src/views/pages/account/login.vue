@@ -11,6 +11,7 @@
       return {
         email: "",
         password: "",
+        caseNumber:"#ENR1029",
         submitted: false
       };
     },
@@ -41,6 +42,7 @@
             const { email, password } = this;
             if (email && password) {
               this.login({ email, password });
+              localStorage.setItem("caseNumber", this.caseNumber);
             }
         }
       }
@@ -106,6 +108,18 @@
                         >{{notification.message}}</b-alert>
                       <div class="text-center ">
                           <form class="form-horizontal justify-content-center" @submit.prevent="tryToLogIn">
+                            <div class="form-group auth-form-group-custom mb-4">
+                              <i class="ri-mail-line auti-custom-input-icon"></i>
+                              <label for="email">Case number</label>
+                              <input
+                                type="text"
+                                v-model="caseNumber"
+                                class="form-control "
+                                id="caseNumber"
+                                placeholder="Case Number"
+                                :class="{ 'is-invalid': submitted }"
+                              />
+                            </div>
                             <div class="form-group auth-form-group-custom mb-4">
                               <i class="ri-mail-line auti-custom-input-icon"></i>
                               <label for="email">Email</label>

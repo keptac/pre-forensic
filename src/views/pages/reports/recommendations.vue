@@ -14,7 +14,8 @@ export default {
   data() {
     return {
       title: "Recommendations",
-      recommandation:"Our analysis has revealed that the individual poses minimal risk to the client, based on an Ai-analysis of the data provided. Further investigation on additional data sets may be required to corroborate these findings.",
+      recommandation:JSON.parse(localStorage.getItem("recommendations"))[0].recommendation,
+      caseNumber:JSON.parse(localStorage.getItem("recommendations"))[0].caseNumber,
       items: [
       ]
     };
@@ -36,10 +37,10 @@ export default {
         <div class="col-lg-4 ">
           <div class="card">
             <div class="card-header">
-              <h5>Overal risk rating</h5>
+              <h5>Case Number</h5>
             </div>
             <div class="card-body">
-              <p class="text-center">1.3 / 5</p>
+              <p class="text-center">{{ caseNumber }}</p>
             </div>
           </div>
         </div>

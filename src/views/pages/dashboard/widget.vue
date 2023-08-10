@@ -12,12 +12,12 @@ export default {
       dashboardReportId:"",
       userRole:  JSON.parse(localStorage.getItem('user')).role,
       shopId:  JSON.parse(localStorage.getItem('user')).shopId,
+      CaseNumber: localStorage.getItem('caseNumber'),
+      Individual: "Jeff Skilling ",
+      Company: "Enron",
+
+
       statData: [
-        {
-          title: "Date",
-          icon: "mdi mdi-clock-outline",
-          value: new Date().getDate() +"/"+ new Date().getMonth()+"/"+ new Date().getYear()
-        },
         {
           title: "Sources ",
           icon: "mdi mdi-finance",
@@ -62,9 +62,7 @@ export default {
         try {
           await reportService.getAlls3Data().then(
             response=>{
-              console.log("------->>>>")
               console.log(response)
-              console.log("<<<<-------")
             }
           );
         // await reportService.getGlobalDashboard(this.dashboardReportId).then(response=>{
@@ -95,6 +93,19 @@ export default {
 
 <template>
   <div class="row">
+    <div class="col-md-2">
+      <div class="card">
+        <div class="card-body">
+          <div class="media">
+            <div class="media-body overflow-hidden">
+              <p class="text-truncate font-size-14 mb-2">Case Number: <b>{{CaseNumber}}</b></p>
+              <p class="text-truncate font-size-16 mb-2"><b>{{Individual}}</b></p>
+              <p class="text-truncate font-size-16 mb-2">Company: {{Company}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="col-md-2" v-for="(data, index) in statData" :key="index">
       <div class="card">
         <div class="card-body">

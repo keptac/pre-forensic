@@ -3,7 +3,7 @@
  * Transactions component
  */
 
-import { accountsService } from '../../../services/accounts.service';
+import { reportService } from '../../../services/report.service';
 import {
   paymentServiceMethods,
   notificationMethods
@@ -12,9 +12,7 @@ import {
 export default {
   data() {
     return {
-      relationshipsData: [
-        { "id":"BR1","date":"08/08/2023", "fromTo":"From/To", "type": "Type(Email/Chat)", "description": "Risk Description" },
-      ],
+      relationshipsData: [],
       expandedRelationshipsData: [],
       variableObject:{},
       transactionsObject:[],
@@ -22,7 +20,7 @@ export default {
       mtotalRows: 1,
       showExpanded: false,
       mcurrentPage: 1,
-      mperPage: 50,
+      mperPage: 5,
       mpageOptions: [5, 10, 25],
       mfilter: null,
       mfilterOn: [],
@@ -33,44 +31,51 @@ export default {
       expandedRelationshipTitle:"",
       totalRows: 1,
       currentPage: 1,
-      perPage: 50,
+      perPage: 5,
       pageOptions: [5, 10, 25],
       filter: null,
       filterOn: [],
       sortBy: "id",
       sortDesc: false,
       fields: [
-        { key: "id", sortable: true, label: "Identifier" },
-        { key: "date", sortable: true, label: "Date Range" },
-        { key: "internalExternal",sortable: true, label: "Internal/External" },
-        { key: "companyRegNumber",sortable: true, label: "ID/Company Reg Number" },
-        { key: "supplierNumber",sortable: true, label: "Supplier Number" },
-        { key: "intercationCount",sortable: true, label: "Interation Count" },
+        { key: "Identifier", sortable: true, label: "Identifier" },
+        { key: "DateRange", sortable: true, label: "Date Range" },
+        { key: "InternalExternal",sortable: true, label: "Internal/External" },
+        { key: "IdCompanyRegNumber",sortable: true, label: "Company Reg Number" },
+        { key: "Riskrating",sortable: true, label: "Risk Rating" },
+        { key: "SupplierNumber",sortable: true, label: "Supplier Number" },
+        { key: "InteractionCount",sortable: true, label: "Interation Count" },
       ],
 
       columns: [
-        { field: "date", label: "Date" },
-        { field: "internal_external", label: "From/To" },
-        { field: "companyRegNumber", label: "Type(Email/Chat)" },
-        { field: "supplierNumber", label: "Risk Description" },
+        { field: "Identifier", label: "Identifier" },
+        { field: "DateRange", label: "DateRange" },
+        { field: "InternalExternal", label: "InternalExternal" },
+        { field: "IdCompanyRegNumber", label: "IdCompanyRegNumber" },
+        { field: "Riskrating", label: "Riskrating" },
+        { field: "SupplierNumber", label: "SupplierNumber" },
+        { field: "InteractionCount", label: "InteractionCount" },
       ],
 
 
       expandedFields: [
-      { key: "id", sortable: true, label: "Identifier" },
-        { key: "date", sortable: true, label: "Date Range" },
-        { key: "internal_external",sortable: true, label: "Internal/External" },
-        { key: "companyRegNumber",sortable: true, label: "ID/Company Reg Number" },
-        { key: "supplierNumber",sortable: true, label: "Supplier Number" },
-        { key: "intercationCount",sortable: true, label: "Interation Count" },
+        { key: "Identifier", sortable: true, label: "Identifier" },
+        { key: "DateRange", sortable: true, label: "Date Range" },
+        { key: "InternalExternal",sortable: true, label: "Internal/External" },
+        { key: "IdCompanyRegNumber",sortable: true, label: "ID/Company Reg Number" },
+        { key: "Riskrating",sortable: true, label: "Risk Rating" },
+        { key: "SupplierNumber",sortable: true, label: "Supplier Number" },
+        { key: "InteractionCount",sortable: true, label: "Interation Count" },
     ],
 
       mcolumns: [
-      { field: "date", label: "Date" },
-        { field: "internal_external", label: "From/To" },
-        { field: "companyRegNumber", label: "Type(Email/Chat)" },
-        { field: "supplierNumber", label: "Risk Description" },
-        { field: "intercationCount", label: "Interation Count" },
+        { field: "Identifier", label: "Identifier" },
+        { field: "DateRange", label: "DateRange" },
+        { field: "InternalExternal", label: "InternalExternal" },
+        { field: "IdCompanyRegNumber", label: "IdCompanyRegNumber" },
+        { field: "Riskrating", label: "Riskrating" },
+        { field: "SupplierNumber", label: "SupplierNumber" },
+        { field: "InteractionCount", label: "InteractionCount" },
       ],
       
     };
@@ -120,8 +125,10 @@ export default {
     },
 
     async loadAllRelationships() {
+
+
         try {
-          await accountsService.getAllRelationships().then(response=>{
+          await reportService.getAlls3Data().then(response=>{
             if(response.responseBody.length>0){
                 this.relationshipsData = response.responseBody;
               }
@@ -129,6 +136,8 @@ export default {
         } catch (error) {
           console.log(error);
         }
+
+        this.relationshipsData = JSON.parse(localStorage.getItem("entity_data"))
     },
 
     closeRelationship(){
@@ -142,7 +151,7 @@ export default {
       this.expandedRelationshipTitle = title;
   
         try {
-          await accountsService.getRelationshipsByIdentifier(id).then(response=>{
+          await reportService.getRelationshipsByIdentifier(id).then(response=>{
             if(response.responseBody.length>0){
                 this.expandedRelationshipsData = response.responseBody;
               }
@@ -151,10 +160,7 @@ export default {
           console.log(error);
         }
 
-        this.expandedRelationshipsData =[
-        { "id":"BR1","date":"08/08/2023", "fromTo":"From/To", "type": "Type(Email/Chat)", "description": "Risk Description" },
-    
-      ]
+        this.expandedRelationshipsData =[]
 
     },
   }
@@ -164,7 +170,7 @@ export default {
 <template>
 
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-body">
           <div class="row mt-4"> 

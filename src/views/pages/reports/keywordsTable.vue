@@ -37,7 +37,7 @@ export default {
       sortBy: "keyword",
       sortDesc: false,
       fields: [
-        { key: "id", sortable: true, label: "Id" },
+        { key: "identifier", sortable: true, label: "Id" },
         { key: "keyword", sortable: true, label: "Keyword" },
         { key: "count",sortable: true, label: "Count" },
         { key: "Action",sortable: false, label: "Action" },
@@ -47,9 +47,8 @@ export default {
         { field: "count", label: "Count" },
       ],
 
-
       expandedFields: [
-        { key: "id", sortable: true, label: " Id" },
+        { key: "identifier", sortable: true, label: " Id" },
         { key: "date",sortable: true, label: "Datae" },
         { key: "from", sortable: true, label: "From" },
         { key: "to", sortable: true, label: "To" },

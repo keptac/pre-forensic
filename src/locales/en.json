@@ -40,23 +40,23 @@
         },
         "locations": {
             "text": "Locations",
-            "badge": "3"
+            "badge": "5"
         },
         "entities": {
             "text": "Entities",
-            "badge": "3"
+            "badge": "6"
         },
         "tagged": {
             "text": "Tagged Data",
-            "badge": "3"
+            "badge": "7"
         },
         "timeline": {
             "text": "Timeline of key Data",
-            "badge": "3"
+            "badge": "8"
         },
         "recommendations": {
             "text": "Recommendations",
-            "badge": "3"
+            "badge": "9"
         },
 
         "usermanagement": {

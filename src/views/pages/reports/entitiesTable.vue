@@ -3,7 +3,7 @@
  * Transactions component
  */
 
-import { accountsService } from '../../../services/accounts.service';
+import { reportService } from '../../../services/report.service';
 import {
   paymentServiceMethods,
   notificationMethods
@@ -12,14 +12,7 @@ import {
 export default {
   data() {
     return {
-      entitiesData: [
-        { "id":"BR1",
-          "businessName":"Company 1", 
-          "registrationNumber":"XYZ 789", 
-          "supplierNumber": "ABC 123", 
-          "interactionCount": 20
-        },
-      ],
+      entitiesData: [],
       expandedEntitiesData: [],
       variableObject:{},
       transactionsObject:[],
@@ -45,10 +38,10 @@ export default {
       sortBy: "id",
       sortDesc: false,
       fields: [
-        { key: "id", sortable: true, label: "Identifier" },
+        { key: "Identifier", sortable: true, label: "Identifier" },
         { key: "businessName", sortable: true, label: "Business Name" },
-        { key: "registrationNumber",sortable: true, label: "Reg Number" },
-        { key: "supplierNumber",sortable: true, label: "Supplier Number" },
+        { key: "IdCompanyRegNumber",sortable: true, label: "Reg Number" },
+        { key: "SupplierNumber",sortable: true, label: "Supplier Number" },
         { key: "interactionCount",sortable: true, label: "Interation Count" },
       ],
 
@@ -124,8 +117,9 @@ export default {
     },
 
     async loadAllEntities() {
+
         try {
-          await accountsService.getAllEntities().then(response=>{
+          await reportService.getAlls3Data().then(response=>{
             if(response.responseBody.length>0){
                 this.entitiesData = response.responseBody;
               }
@@ -133,6 +127,8 @@ export default {
         } catch (error) {
           console.log(error);
         }
+
+        this.entitiesData = JSON.parse(localStorage.getItem("entity_data"))
     },
 
     closeEntity(){
@@ -146,7 +142,7 @@ export default {
       this.expandedEntityTitle = title;
   
         try {
-          await accountsService.getEntitiesByIdentifier(id).then(response=>{
+          await reportService.getEntitiesByIdentifier(id).then(response=>{
             if(response.responseBody.length>0){
                 this.expandedEntitiesData = response.responseBody;
               }
@@ -156,12 +152,6 @@ export default {
         }
 
         this.expandedEntitiesData =[
-          { "id":"BR1",
-            "businessName":"Company 1", 
-            "registrationNumber":"XYZ 789", 
-            "supplierNumber": "ABC 123", 
-            "interactionCount": 20
-          },
         ]
 
     },
