@@ -39,7 +39,7 @@ export default {
           value: "1"
         },
         {
-          title: "Keywords Detected",
+          title: "Anomalies Detected",
           icon: "mdi mdi-finance",
           value: 0
         }
