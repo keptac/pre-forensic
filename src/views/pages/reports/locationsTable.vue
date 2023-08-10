@@ -88,7 +88,7 @@ export default {
         { "id":"1",
           "country":"South Africa", 
           "city":"Johannesburg ", 
-          "count": 150
+          "count": 100
         },
       ];
     },

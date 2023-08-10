@@ -13,11 +13,11 @@ export default {
   data() {
     return {
       riskData: [
-        { "id":"BR1",
-          "date":"08/08/2023", 
-          "from_to":"From/To", 
-          "type": "Type(Email/Chat)", 
-          "description": "Risk Description" 
+        { "id":"",
+          "date":"", 
+          "from_to":"", 
+          "type": "", 
+          "description": "" 
         },
       ],
       expandedRisksData: [],
@@ -158,12 +158,12 @@ export default {
 
         this.expandedRisksData =[
           { 
-            "id": " BR1" ,
-            "date": "25/03/223" ,
-            "from_to": "Kelvin/Andre" ,
-            "subject":"Test subject" ,
-            "riskRating": "5.6/10" ,
-            "location": "Harare" 
+            "id": "" ,
+            "date": "" ,
+            "from_to": "" ,
+            "subject":"" ,
+            "riskRating": "" ,
+            "location": "" 
           }
       ]
 
