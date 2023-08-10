@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       keywords:localStorage.getItem('keyword_data_count'),
-      behavioualRisks:0
+      behavioualRisks: 0
     };
   }
 };
@@ -42,7 +42,7 @@ export default {
                 <div class="media">
                   <div class="media-body overflow-hidden">
                     <h5 class="text-truncate font-size-16 mb-2">Behavioural Risks Identified</h5>
-                    <h2 class="text-truncate mb-2">{{ behavioualRisks }}</h2>
+                    <h2 class="text-truncate mb-2">{{ behavioualRisks==undefined?0:behavioualRisks }}</h2>
 
                   </div>
                 </div>
@@ -55,7 +55,7 @@ export default {
                 <div class="media">
                   <div class="media-body overflow-hidden">
                     <h5 class="text-truncate font-size-16 mb-2">Keywords</h5>
-                    <h2 class="text-truncate mb-2">{{keywords}}</h2>
+                    <h2 class="text-truncate mb-2">{{keywords==undefined?0:keywords}}</h2>
                     
                   </div>
                 </div>

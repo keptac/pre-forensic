@@ -1,7 +1,7 @@
 <script>
 import Layout from "../../layouts/main";
 import PageHeader from "@/components/page-header";
-
+import recommendationsJsonData from '../../../assets/data/recommendations.json';
 /**
  * Starter page component
  */
@@ -14,8 +14,10 @@ export default {
   data() {
     return {
       title: "Recommendations",
-      recommandation:JSON.parse(localStorage.getItem("recommendations"))[0].recommendation,
-      caseNumber:JSON.parse(localStorage.getItem("recommendations"))[0].caseNumber,
+      recommandation:JSON.parse(localStorage.getItem("recommendations"))==undefined?recommendationsJsonData[0].recommendation: JSON.parse(localStorage.getItem("recommendations"))[0].recommendation,
+
+
+      caseNumber:JSON.parse(localStorage.getItem("recommendations"))==undefined?recommendationsJsonData[0].caseNumber: JSON.parse(localStorage.getItem("recommendations"))[0].caseNumber,
       items: [
       ]
     };

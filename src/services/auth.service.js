@@ -151,6 +151,7 @@ function logout() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('user');
     localStorage.removeItem('businessConditions');
+    localStorage.clear();
 }
 
 function handleResponse(response) {

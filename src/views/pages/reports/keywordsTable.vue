@@ -26,7 +26,7 @@ export default {
       mfilter: null,
       mfilterOn: [],
       message:"",
-      // msortBy: "keyword",
+      msortBy: "",
       msortDesc: false,
 
 
@@ -37,12 +37,12 @@ export default {
       pageOptions: [5, 10, 25],
       filter: null,
       filterOn: [],
-      // sortBy: "keyword",
+      sortBy: "",
       sortDesc: false,
       fields: [
         { key: "identifier", sortable: true, label: "Id" },
         { key: "keyword", sortable: true, label: "Keyword" },
-        { key: "count",sortable: true, label: "Count" },
+        // { key: "count",sortable: true, label: "Count" },
         { key: "Action",sortable: false, label: "Action" },
       ],
       columns: [
@@ -145,6 +145,7 @@ export default {
     },
 
     saveBody(row){
+      console.log(row)
       this.message = row.body.replace(/\\n/g, '<br/>').replace(/\\r/g, '').replace("b'","").replace(/\\'/g, "'") ;
       this.modalTitle = row.subject;
     },
@@ -175,7 +176,7 @@ export default {
       <b-modal size="lg" id="message-body-modal" :title="modalTitle" title-class="font-18" hide-footer>
           <div class="row">
             <div class="col-md-12">
-                <p class="mb-2 ml-5" v-html="message"></p>
+                <p class="mb-2 ml-5 mr-5" v-html="message"></p>
               </div>
             </div>
     </b-modal>
