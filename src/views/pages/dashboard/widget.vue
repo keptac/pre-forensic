@@ -21,27 +21,27 @@ export default {
         {
           title: "Sources ",
           icon: "mdi mdi-finance",
-          value: "0.00"
+          value: localStorage.getItem('external_data_count')
         },
         {
           title: "Data size",
           icon: "mdi mdi-finance",
-          value: "0.00"
+          value: "100gb"
         },
         {
           title: "Relationships Identified",
           icon: "mdi mdi-finance",
-          value: "0.00"
+          value: localStorage.getItem('entity_data_count')
         },
         {
           title: "Locations Indentified",
           icon: "mdi mdi-finance",
-          value: "0.00"
+          value: "1"
         },
         {
-          title: "Anomalies Detected",
+          title: "Keywords Detected",
           icon: "mdi mdi-finance",
-          value: "0.00"
+          value: localStorage.getItem('keyword_data_count')
         }
       ]
     };

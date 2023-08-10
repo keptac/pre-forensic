@@ -34,16 +34,6 @@ const ackremittancesServiceEndpoint = getEndpoint();
 
 async function getAlls3Data() {
 
-//     result = client.get_object(Bucket=BUCKET, Key=FILE_TO_READ) 
-// text = result["Body"].read().decode()
-// print(text['Details']) # Use your desired JSON Key for your value 
-
-    // var bucketParams = {
-    //     Bucket : 'preforensic-data',
-    //     Key: 'input_internal_data_json.json'
-    // };
-    
-
     // input_internal_data
     s3.getObject({
         Bucket : 'preforensic-data',
@@ -58,6 +48,7 @@ async function getAlls3Data() {
         Bucket : 'preforensic-data',
         Key: 'external_data_json.json'
     }).on('success', function(response) {
+        localStorage.setItem('external_data_count', JSON.parse(response.data.Body).length);
         localStorage.setItem('external_data', JSON.stringify(JSON.parse(response.data.Body)));
         return response;
     }).send();
@@ -68,6 +59,7 @@ async function getAlls3Data() {
         Bucket : 'preforensic-data',
         Key: 'key_words_data_.json'
     }).on('success', function(response) {
+        localStorage.setItem('keyword_data_count', JSON.parse(response.data.Body).length);
         localStorage.setItem('keyword_data', JSON.stringify(JSON.parse(response.data.Body).slice(0,30)));
         return response;
     }).send();
@@ -86,6 +78,7 @@ async function getAlls3Data() {
         Bucket : 'preforensic-data',
         Key: 'entity_data.json'
     }).on('success', function(response) {
+        localStorage.setItem('entity_data_count', JSON.parse(response.data.Body).length);
         localStorage.setItem('entity_data', JSON.stringify(JSON.parse(response.data.Body).slice(0,30)));
         return response;
     }).send();

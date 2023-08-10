@@ -42,7 +42,6 @@
     "vue-echarts": "^5.0.0-beta.0",
     "vue-excel-xlsx": "^1.2.2",
     "vue-form-wizard": "^0.8.4",
-
     "vue-i18n": "^8.22.2",
     "vue-map-chart": "^0.0.2",
     "vue-meta": "^2.4.0",
@@ -51,6 +50,7 @@
     "vue-phone-number-input": "^1.12.13",
     "vue-router": "^3.4.9",
     "vue-slide-bar": "^1.2.0",
+    "vue-speedometer": "^1.7.0",
     "vue-star-rating": "^1.7.0",
     "vue-sweetalert2": "^4.1.1",
     "vue-switches": "^2.0.1",

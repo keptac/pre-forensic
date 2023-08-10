@@ -118,7 +118,7 @@ export default {
             } catch (error) {
                 console.log(error);
             }
-            this.externalData = [JSON.parse(localStorage.getItem("external_data"))]
+            this.externalData = JSON.parse(localStorage.getItem("external_data"))
         },
 
     async loadAllInputData() {
@@ -132,7 +132,7 @@ export default {
           console.log(error);
         }
 
-        this.inputInternalData = [JSON.parse(localStorage.getItem("input_internal_data"))]
+        this.inputInternalData = JSON.parse(localStorage.getItem("input_internal_data"))
 
     },
 
