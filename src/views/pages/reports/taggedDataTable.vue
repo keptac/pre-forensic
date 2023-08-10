@@ -15,15 +15,6 @@ export default {
 
        // Internal Data
       taggedData: [
-          { 
-            fileName: "fileName", 
-            type:"type",
-            size:"size", 
-            createby:"createby", 
-            dateInitiated:"dateInitiated",
-            dateModified:"dateModified", 
-            dateAccessed:"dateAccessed" 
-          },
       ],
       variableObject:{},
       modalTitle:"",
@@ -61,11 +52,7 @@ export default {
 
       // External Data
       externalData: [
-          { 
-            source: "Source", 
-            batchDate:"BATCH DATE",
-            qtyReportsPulled:"100", 
-          },
+
       ],
 
       etotalRows: 1,
@@ -225,37 +212,10 @@ export default {
             </label>
           </div>
         </div>
-        
-        <!-- date Filter -->
-        <div class="col-sm-12 col-md-6">
 
-          <div id="tickets-table_filter" class="row mb-3">
-            <form  @submit.prevent="searchInputData">
-              <label class=" ml-3  d-inline-flex align-items-center">
-                Start 
-                <input
-                  v-model="form.startDate"
-                  type="date"
-                  class="form-control form-control-sm ml-2"
-                />
-              </label>
-              <label class=" ml-3  d-inline-flex align-items-center">
-                End
-                <input
-                  v-model="form.endDate"
-                  type="date"
-                  class="form-control form-control-sm ml-2"
-                />
-              </label>
-              <button class="ml-3 btn btn-primary d-inline-flex align-items-center" type="submit">Search</button>
-            </form>
-          </div>
-            
-        </div>
-        <!-- end of date filter -->
 
         <!-- Search -->
-        <div class="col-sm-12 col-md-3">
+        <div class="col-sm-12 col-md-9">
           <div id="tickets-table_filter" class="dataTables_filter text-md-right">
             <label class="d-inline-flex align-items-center">
               Search:

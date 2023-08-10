@@ -101,9 +101,9 @@ export default {
         }
 
         this.timelineData = [
-        { "id":"BR1",
-          "date":"08/08/2023", 
-          "count":50
+        { "id":"",
+          "date":"", 
+          "count":0
         },
       ];
     },

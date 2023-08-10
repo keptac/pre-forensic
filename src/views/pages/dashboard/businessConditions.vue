@@ -95,16 +95,7 @@ export default {
 
           <div class="col-md-12">
             <div class="card">
-              <div class="card-body text-center mb-2 mt-2">
-                <div class="media">
-                  <div class="media-body overflow-hidden">
-                    <h5 class="text-truncate font-size-16 mb-2">Overal Risk Rating</h5>
-                    <Gauge/>
-
-                    <h2 class="text-truncate mb-2">0.61</h2>
-                  </div>
-                </div>
-              </div>
+                <Gauge/>
             </div>
           </div>
         </div>

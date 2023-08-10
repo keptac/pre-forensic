@@ -39,9 +39,9 @@ export default {
           value: "1"
         },
         {
-          title: "Keywords Detected",
+          title: "Anomalies Detected",
           icon: "mdi mdi-finance",
-          value: localStorage.getItem('keyword_data_count')
+          value: 0
         }
       ]
     };
