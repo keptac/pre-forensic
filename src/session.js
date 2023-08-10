@@ -12,7 +12,7 @@ let sessionTimer = setTimeout(() => {
   // Redirect the user to the login page
 //   window.location.href = '/login';
   router.push('/login');
-}, TIMEOUT_PERIOD * 180 * 1000);
+}, TIMEOUT_PERIOD * 2700 * 1000);
 
 // Reset the timer whenever the user interacts with the app
 document.addEventListener('mousemove', resetSessionTimer);
@@ -29,5 +29,5 @@ export default function resetSessionTimer() {
     localStorage.removeItem('accessRights');
     // Redirect the user to the login page
     router.push('/login');
-  }, TIMEOUT_PERIOD * 180 * 1000);
+  }, TIMEOUT_PERIOD * 2700 * 1000);
 }

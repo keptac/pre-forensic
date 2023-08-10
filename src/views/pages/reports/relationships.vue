@@ -26,11 +26,9 @@ export default {
     <PageHeader class="mt-5 ml-2" :title="title" :items="items" />
     <div class="row">
         <div class="col-lg-12 ">
-          <div class="card">
-            <div class="card-body">
-              <p class="text-center">Visual Chat Coming soon</p>
-            </div>
-          </div>
+          <p class="text-center">
+            <img src="@/assets/data/bloom-visualisation.png" alt height="300" />
+          </p>
         </div>
     </div>
       <div class="row">

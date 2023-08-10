@@ -7,9 +7,9 @@ export default {
   data() {
     return {
       countryData: {
-        "ZA": 150,
-        "ZW": 2,
-        "ZM": 0,
+        "US": 100,
+        "CA": 20,
+        "CU": 40,
       }
     };
   }

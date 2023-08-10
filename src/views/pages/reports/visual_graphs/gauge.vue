@@ -6,7 +6,7 @@ export default {
   data() {
     return {
 
-          series: [((0.65/5)*100)],
+          series: [((8.3/10)*100)],
           chartOptions: {
             chart: {
               height: 350,
@@ -28,7 +28,7 @@ export default {
                     fontSize: '16px',
                     color: undefined,
                     formatter: function (val) {
-                      return (val*5)/100 ;
+                      return (val*10)/100 ;
                     }
                   }
                 }

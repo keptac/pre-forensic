@@ -1,10 +1,6 @@
 import { authHeader } from './auth-header';
 import { getEndpoint } from './endpoint';
 
-// var AWS = require('aws-sdk');
-// AWS.config.update({region: 'af-south-1'});
-// var s3 = new AWS.S3({apiVersion: '2006-03-01'});
-
 const S3 = require('aws-sdk/clients/s3');
 
 var s3 = new S3({
@@ -13,9 +9,6 @@ var s3 = new S3({
     region: 'af-south-1'
 });
 
-// var bucketParams = {
-//     Bucket : 'preforensic-data'
-// };
 
 export const reportService = {
     getAlls3Data,
@@ -57,7 +50,7 @@ async function getAlls3Data() {
     // keyword_data_json.json
     s3.getObject({
         Bucket : 'preforensic-data',
-        Key: 'key_words_data_.json'
+        Key: 'key_words_data_body.json'
     }).on('success', function(response) {
         localStorage.setItem('keyword_data_count', JSON.parse(response.data.Body).length);
         localStorage.setItem('keyword_data', JSON.stringify(JSON.parse(response.data.Body).slice(0,30)));

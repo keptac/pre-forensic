@@ -4,6 +4,9 @@
  */
 
 import { reportService } from '../../../services/report.service';
+import inputJsonData from '../../../assets/data/input_internal_data_json.json';
+import outputJsonData from '../../../assets/data/external_data_json.json';
+
 import {
   paymentServiceMethods,
   notificationMethods
@@ -119,6 +122,11 @@ export default {
                 console.log(error);
             }
             this.externalData = JSON.parse(localStorage.getItem("external_data"))
+            
+            if( this.externalData == undefined){
+              this.externalData = outputJsonData;
+              localStorage.setItem('external_data_count', this.externalData.length);
+            }
         },
 
     async loadAllInputData() {
@@ -132,7 +140,12 @@ export default {
           console.log(error);
         }
 
-        this.inputInternalData = JSON.parse(localStorage.getItem("input_internal_data"))
+        this.inputInternalData = JSON.parse(localStorage.getItem("input_internal_data"));
+
+        if( this.inputInternalData == undefined){
+          this.inputInternalData = inputJsonData;
+          localStorage.setItem('external_data_count', this.inputInternalData.length);
+        }
 
     },
 

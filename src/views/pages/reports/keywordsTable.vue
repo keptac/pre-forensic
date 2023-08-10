@@ -4,6 +4,7 @@
  */
 
 import { reportService } from '../../../services/report.service';
+import keywordsJsonData from '../../../assets/data/key_words_data_body.json';
 import {
   paymentServiceMethods,
   notificationMethods
@@ -16,6 +17,7 @@ export default {
       expandedKeywordsData: [],
       variableObject:{},
       transactionsObject:[],
+      modalTitle:"",
       mtotalRows: 1,
       showExpanded: false,
       mcurrentPage: 1,
@@ -23,7 +25,8 @@ export default {
       mpageOptions: [5, 10, 25],
       mfilter: null,
       mfilterOn: [],
-      msortBy: "keyword",
+      message:"",
+      // msortBy: "keyword",
       msortDesc: false,
 
 
@@ -34,7 +37,7 @@ export default {
       pageOptions: [5, 10, 25],
       filter: null,
       filterOn: [],
-      sortBy: "keyword",
+      // sortBy: "keyword",
       sortDesc: false,
       fields: [
         { key: "identifier", sortable: true, label: "Id" },
@@ -53,8 +56,7 @@ export default {
         { key: "from", sortable: true, label: "From" },
         { key: "to", sortable: true, label: "To" },
         { key: "subject", sortable:true, label:"Subject" },
-        { key: "keyword", sortable: true, label: "Keyword" },
-        { key: "members", sortable: true, label: "Members" },
+        { key: "body", sortable: true, label: "Message body" },
         { key: "riskRating", sortable: true, label: "Risk Rating" },
         { key: "location", sortable: true, label: "Location" }
       ],
@@ -130,11 +132,21 @@ export default {
         }
 
         this.keywordsData = JSON.parse(localStorage.getItem("keyword_data"))
+
+        if( this.keywordsData == undefined){
+          this.keywordsData = keywordsJsonData;
+          localStorage.setItem('keyword_data_count', this.keywordsData.length);
+        }
     },
 
     closeKeyWord(){
       this.expandedKeywordsData = [];
       this.showExpanded = false;
+    },
+
+    saveBody(row){
+      this.message = row.body.replace(/\\n/g, '<br/>').replace(/\\r/g, '').replace("b'","").replace(/\\'/g, "'") ;
+      this.modalTitle = row.subject;
     },
 
     async expandKeyWord(row, title){
@@ -159,6 +171,14 @@ export default {
 </script>
 
 <template>
+  <div>
+      <b-modal size="lg" id="message-body-modal" :title="modalTitle" title-class="font-18" hide-footer>
+          <div class="row">
+            <div class="col-md-12">
+                <p class="mb-2 ml-5" v-html="message"></p>
+              </div>
+            </div>
+    </b-modal>
 
   <div class="row">
     <div class="col-md-4">
@@ -297,6 +317,19 @@ export default {
               :filter-included-fields="mfilterOn"
               @filtered="monFiltered"
             >
+            <template v-slot:cell(body)="row">
+                  <a
+                    @click="saveBody(row.item)"
+                    href="javascript:void(0);"
+                    class="mr-3 text-primary text-center"
+                    v-b-tooltip.hover
+                    title="Click to read message"
+                  >
+                  <div v-b-modal.message-body-modal> <i class=" ri-eye-fill font-size-24"></i></div>
+                 
+
+                  </a>
+              </template>
             </b-table>
           </div>
           <div class="row">
@@ -313,4 +346,5 @@ export default {
       </div>
     </div>
   </div>
+</div>
 </template>

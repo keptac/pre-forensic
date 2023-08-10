@@ -30,7 +30,7 @@ export default {
                     <h5 class="text-truncate font-size-14 mb-2">Internal Sources</h5>
                     <p class="text-truncate font-size-16 mb-2">YES</p>
                     <h5 class="text-truncate font-size-14 mb-2">External Sources</h5>
-                    <p class="text-truncate font-size-16 mb-2">YES</p>
+                    <p class="text-truncate font-size-16 mb-2">NO</p>
                   </div>
                 </div>
               </div>

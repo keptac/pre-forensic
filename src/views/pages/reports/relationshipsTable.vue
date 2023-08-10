@@ -4,6 +4,7 @@
  */
 
 import { reportService } from '../../../services/report.service';
+import entityJsonData from '../../../assets/data/entity_data.json';
 import {
   paymentServiceMethods,
   notificationMethods
@@ -41,8 +42,8 @@ export default {
         { key: "Identifier", sortable: true, label: "Identifier" },
         { key: "DateRange", sortable: true, label: "Date Range" },
         { key: "InternalExternal",sortable: true, label: "Internal/External" },
-        { key: "IdCompanyRegNumber",sortable: true, label: "Company Reg Number" },
-        { key: "Riskrating",sortable: true, label: "Risk Rating" },
+        { key: "IdCompanyRegNumber",sortable: true, label: "Reg Number" },
+        // { key: "Riskrating",sortable: true, label: "Risk Rating" },
         { key: "SupplierNumber",sortable: true, label: "Supplier Number" },
         { key: "InteractionCount",sortable: true, label: "Interation Count" },
       ],
@@ -138,6 +139,11 @@ export default {
         }
 
         this.relationshipsData = JSON.parse(localStorage.getItem("entity_data"))
+
+        if( this.relationshipsData == undefined){
+          this.relationshipsData = entityJsonData;
+          localStorage.setItem('entity_data_count', this.relationshipsData.length);
+        }
     },
 
     closeRelationship(){

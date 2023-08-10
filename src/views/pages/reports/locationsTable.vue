@@ -86,9 +86,20 @@ export default {
 
         this.locationsData =[
         { "id":"1",
-          "country":"South Africa", 
-          "city":"Johannesburg ", 
+          "country":"United States", 
+          "city":"US ", 
           "count": 100
+        },
+        
+        { "id":"2",
+          "country":"CANADA", 
+          "city":"CA", 
+          "count": 20
+        },
+        { "id":"3",
+          "country":"CUBA", 
+          "city":"CU", 
+          "count": 40
         },
       ];
     },
