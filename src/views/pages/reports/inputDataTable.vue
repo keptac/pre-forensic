@@ -14,17 +14,7 @@ export default {
     return {
 
        // Internal Data
-      inputInternalData: [
-          { 
-            fileName: "fileName", 
-            type:"type",
-            size:"size", 
-            createby:"createby", 
-            dateInitiated:"dateInitiated",
-            dateModified:"dateModified", 
-            dateAccessed:"dateAccessed" 
-          },
-      ],
+      inputInternalData: [],
       variableObject:{},
       modalTitle:"",
       totalRows: 1,
@@ -60,13 +50,7 @@ export default {
       },
 
       // External Data
-      externalData: [
-          { 
-            source: "Source", 
-            batchDate:"BATCH DATE",
-            qtyReportsPulled:"100", 
-          },
-      ],
+      externalData: [],
 
       etotalRows: 1,
       ecurrentPage: 1,
@@ -120,14 +104,13 @@ export default {
     ...notificationMethods,
 
     onFiltered(filteredItems) {
-      // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
     },
 
     async loadAllExternalData() {
             try {
-                await reportService.getAllExternalData().then(response=>{
+                await reportService.getAlls3Data().then(response=>{
                     if(response.responseBody.length>0){
                       this.externalData = response.responseBody;
                     }
@@ -135,11 +118,12 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+            this.externalData = [JSON.parse(localStorage.getItem("external_data"))]
         },
 
     async loadAllInputData() {
         try {
-          await reportService.getGlobalInputDataReport().then(response=>{
+          await reportService.getAlls3Data().then(response=>{
             if(response.responseBody.length>0){
                 this.inputInternalData = response.responseBody;
               }
@@ -147,6 +131,9 @@ export default {
         } catch (error) {
           console.log(error);
         }
+
+        this.inputInternalData = [JSON.parse(localStorage.getItem("input_internal_data"))]
+
     },
 
     searchInputData() {
@@ -227,7 +214,7 @@ export default {
         </div>
         
         <!-- date Filter -->
-        <div class="col-sm-12 col-md-6">
+        <!-- <div class="col-sm-12 col-md-6">
 
           <div id="tickets-table_filter" class="row mb-3">
             <form  @submit.prevent="searchInputData">
@@ -251,11 +238,11 @@ export default {
             </form>
           </div>
             
-        </div>
+        </div> -->
         <!-- end of date filter -->
 
         <!-- Search -->
-        <div class="col-sm-12 col-md-3">
+        <div class="col-sm-12 col-md-9">
           <div id="tickets-table_filter" class="dataTables_filter text-md-right">
             <label class="d-inline-flex align-items-center">
               Search:

@@ -20,12 +20,12 @@ export default {
         },
         {
           title: "Sources ",
-          icon: "ri-money-dollar-circle-line",
+          icon: "mdi mdi-finance",
           value: "0.00"
         },
         {
           title: "Data size",
-          icon: "mdi mdi-account-cash-outline",
+          icon: "mdi mdi-finance",
           value: "0.00"
         },
         {
@@ -60,12 +60,19 @@ export default {
   methods:{
     async getDashboardReport() {
         try {
-        await reportService.getGlobalDashboard(this.dashboardReportId).then(response=>{
-            if(response.status ==="SUCCESS"){
-                this.reportData = response.responseBody;
-                this.loadStats();
-              }
-          });
+          await reportService.getAlls3Data().then(
+            response=>{
+              console.log("------->>>>")
+              console.log(response)
+              console.log("<<<<-------")
+            }
+          );
+        // await reportService.getGlobalDashboard(this.dashboardReportId).then(response=>{
+        //     if(response.status ==="SUCCESS"){
+        //         this.reportData = response.responseBody;
+        //         this.loadStats();
+        //       }
+        //   });
         } catch (error) {
           console.log(error);
         }

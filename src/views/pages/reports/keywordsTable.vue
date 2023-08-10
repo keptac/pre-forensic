@@ -3,7 +3,7 @@
  * Transactions component
  */
 
-import { accountsService } from '../../../services/accounts.service';
+import { reportService } from '../../../services/report.service';
 import {
   paymentServiceMethods,
   notificationMethods
@@ -12,21 +12,14 @@ import {
 export default {
   data() {
     return {
-      keywordsData: [
-        {
-          "id":1,
-          "keyword":"TEST",
-          "count":20
-        }
-      ],
+      keywordsData: [],
       expandedKeywordsData: [],
       variableObject:{},
       transactionsObject:[],
-
       mtotalRows: 1,
       showExpanded: false,
       mcurrentPage: 1,
-      mperPage: 50,
+      mperPage: 5,
       mpageOptions: [5, 10, 25],
       mfilter: null,
       mfilterOn: [],
@@ -37,7 +30,7 @@ export default {
       exapndedKeywordTitle:"",
       totalRows: 1,
       currentPage: 1,
-      perPage: 50,
+      perPage: 5,
       pageOptions: [5, 10, 25],
       filter: null,
       filterOn: [],
@@ -83,7 +76,7 @@ export default {
   },
 
   created() {
-    this.loadAllTransactions()
+    this.loadAllKeywords()
   },
 
   computed: {
@@ -125,9 +118,10 @@ export default {
       this.mcurrentPage = 1;
     },
 
-    async loadAllTransactions() {
-        try {
-          await accountsService.getAllKeywords().then(response=>{
+    async loadAllKeywords() {
+        
+      try {
+          await reportService.getAlls3Data().then(response=>{
             if(response.responseBody.length>0){
                 this.keywordsData = response.responseBody;
               }
@@ -135,20 +129,21 @@ export default {
         } catch (error) {
           console.log(error);
         }
+
+        this.keywordsData = JSON.parse(localStorage.getItem("keyword_data"))
     },
 
     closeKeyWord(){
       this.expandedKeywordsData = [];
       this.showExpanded = false;
-
     },
 
-    async expandKeyWord(title, id){
+    async expandKeyWord(row, title){
       this.showExpanded = true;
       this.exapndedKeywordTitle = title;
   
         try {
-          await accountsService.getKeywordsById(id).then(response=>{
+          await reportService.getAlls3Data().then(response=>{
             if(response.responseBody.length>0){
                 this.expandedKeywordsData = response.responseBody;
               }
@@ -157,9 +152,7 @@ export default {
           console.log(error);
         }
 
-        this.expandedKeywordsData =[
-        { "id": " T1" ,"date": "25/03/223" ,"from": "Kelvin" ,"to": "Andre" ,"subject":"Test subject" ,"keyword": "TEST" ,"members": "John, James, Mary, Martha" ,"riskRating": "5.6/10" ,"location": "Harare" }
-      ]
+        this.expandedKeywordsData =[row]
 
     },
   }
@@ -215,7 +208,7 @@ export default {
             >
               <template v-slot:cell(action)="row">
                   <a
-                    @click="expandKeyWord(row.item.keyword, row.item.id)"
+                    @click="expandKeyWord(row.item, row.item.keyword)"
                     href="javascript:void(0);"
                     class="mr-3 text-primary"
                     v-b-tooltip.hover

@@ -1,18 +1,95 @@
 import { authHeader } from './auth-header';
 import { getEndpoint } from './endpoint';
 
+// var AWS = require('aws-sdk');
+// AWS.config.update({region: 'af-south-1'});
+// var s3 = new AWS.S3({apiVersion: '2006-03-01'});
+
+const S3 = require('aws-sdk/clients/s3');
+
+var s3 = new S3({
+    accessKeyId: 'AKIAXVFKDDIKDCP2FJGX',
+    secretAccessKey: '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',
+    region: 'af-south-1'
+});
+
+// var bucketParams = {
+//     Bucket : 'preforensic-data'
+// };
+
 export const reportService = {
+    getAlls3Data,
     getGlobalDashboard,
     searchTransactions,
     getGlobalTransactionReport,
     getUserAuditResponse,
     logout,
-    getTellerDashboard,
+    getTellerDashboard
+    
 };
 
 export const state = { status: false };
 
 const ackremittancesServiceEndpoint = getEndpoint();
+
+async function getAlls3Data() {
+
+//     result = client.get_object(Bucket=BUCKET, Key=FILE_TO_READ) 
+// text = result["Body"].read().decode()
+// print(text['Details']) # Use your desired JSON Key for your value 
+
+    // var bucketParams = {
+    //     Bucket : 'preforensic-data',
+    //     Key: 'input_internal_data_json.json'
+    // };
+    
+
+    // input_internal_data
+    s3.getObject({
+        Bucket : 'preforensic-data',
+        Key: 'input_internal_data_json.json'
+    }).on('success', function(response) {
+        localStorage.setItem('input_internal_data', JSON.stringify(JSON.parse(response.data.Body)));
+        return response;
+    }).send();
+
+    //external_data_json.json
+    s3.getObject({
+        Bucket : 'preforensic-data',
+        Key: 'external_data_json.json'
+    }).on('success', function(response) {
+        localStorage.setItem('external_data', JSON.stringify(JSON.parse(response.data.Body)));
+        return response;
+    }).send();
+
+    
+    // keyword_data_json.json
+    s3.getObject({
+        Bucket : 'preforensic-data',
+        Key: 'key_words_data_.json'
+    }).on('success', function(response) {
+        localStorage.setItem('keyword_data', JSON.stringify(JSON.parse(response.data.Body).slice(0,30)));
+        return response;
+    }).send();
+
+    // recommendations.json
+    s3.getObject({
+        Bucket : 'preforensic-data',
+        Key: 'recommendations.json'
+    }).on('success', function(response) {
+        localStorage.setItem('recommendations', JSON.stringify(JSON.parse(response.data.Body).slice(0,30)));
+        return response;
+    }).send();
+
+    // entity_data.json
+    s3.getObject({
+        Bucket : 'preforensic-data',
+        Key: 'entity_data.json'
+    }).on('success', function(response) {
+        localStorage.setItem('entity_data', JSON.stringify(JSON.parse(response.data.Body).slice(0,30)));
+        return response;
+    }).send();
+}
 
 async function getGlobalDashboard(id) {
 

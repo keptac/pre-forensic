@@ -19,7 +19,7 @@
     "@fullcalendar/timegrid": "^5.4.0",
     "@fullcalendar/vue": "^5.4.0",
     "apexcharts": "^3.22.2",
-    "aws-sdk": "^2.1428.0",
+    "aws-sdk": "^2.1431.0",
     "axios": "^0.26.1",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.19.0",
@@ -42,7 +42,7 @@
     "vue-echarts": "^5.0.0-beta.0",
     "vue-excel-xlsx": "^1.2.2",
     "vue-form-wizard": "^0.8.4",
-    "vue-html-to-paper": "^2.0.3",
+
     "vue-i18n": "^8.22.2",
     "vue-map-chart": "^0.0.2",
     "vue-meta": "^2.4.0",

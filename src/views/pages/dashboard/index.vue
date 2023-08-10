@@ -6,6 +6,7 @@ import Stat from "./widget";
 // import RemittanceAnalytics from "./remittance-analytics";
 // import BusinessConditions from "./businessConditions";
 import LocationsHeatMap from "../reports/visual_graphs/locationsHeatMap"
+import Timelinechart from "../reports/visual_graphs/timelineChart"
 
 export default {
   components: {
@@ -13,6 +14,7 @@ export default {
     PageHeader,
     Stat,
     LocationsHeatMap,
+    Timelinechart
     // RevenueAnalytics,
     // RemittanceAnalytics,
     // BusinessConditions
@@ -39,7 +41,7 @@ export default {
 
 <template>
   <Layout>
-    <PageHeader class="mt-5 ml-2" :title="title" :items="items" />
+    <PageHeader class="mt-3 ml-2" :title="title" :items="items" />
     <div class="row">
       <div class="col-xl-12">
         <Stat />
@@ -48,10 +50,11 @@ export default {
     </div>
     <div class="row">
       <div class="col-xl-5">
+        <Timelinechart/>
         <LocationsHeatMap />
       </div>
       <div class="col-xl-7">
-        <LocationsHeatMap />
+        <!-- <LocationsHeatMap /> -->
       </div>
     </div>
   </Layout>
