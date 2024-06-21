@@ -33,7 +33,9 @@ export default {
         { key: "caseDescription", sortable: true, label: "Case Description" },
         { key: "createby", sortable: true, label: "Created By " },
         { key: "dateInitiated", sortable: true, label:"Date created" },
-        { key: "staus", sortable: true, label:"Status" },
+        { key: "status", sortable: true, label:"Status" },
+        { key: "action", sortable:false, label:"Action"}
+
       ],
 
       columns: [
@@ -42,7 +44,7 @@ export default {
         { field: "caseDescription",label: "Case Description" },
         { field: "createby",label: "Created By" },
         { field: "dateInitiated", label:"Date created" },
-        { field: "staus", label:"Status" },
+        { field: "status", label:"Status" }
       ],
       form: {
         startDate: "",
@@ -200,23 +202,25 @@ export default {
             <template v-slot:cell(status)="row">
               <div
                 class="badge font-size-14 badge-soft-success"
-                :class="{'badge-soft-danger': `${row.item.transactionDetails.transactionStatus}` === 'declined',
-                'badge-soft-success': `${row.item.transactionDetails.transactionStatus}` === 'collected',
-                'badge-soft-info': `${row.item.transactionDetails.transactionStatus}` === 'approved',
-                'badge-soft-warning': `${row.item.transactionDetails.transactionStatus}` === 'pending'}"
-              >{{row.item.transactionDetails.transactionStatus==='pending'?'Deposit Pending':row.item.transactionDetails.transactionStatus==='approved'?'Pending Collection':String(row.item.transactionDetails.transactionStatus).toUpperCase()}}</div>
+                :class="{'badge-soft-danger': `${row.item.status}` === 'declined',
+                'badge-soft-success': `${row.item.statuss}` === 'collected',
+                'badge-soft-info': `${row.item.status}` === 'approved',
+                'badge-soft-warning': `${row.item.status}` === 'pending'}"
+              >{{row.item.status==='pending'?'Deposit Pending':row.item.status==='approved'?'Pending Collection':String(row.item.status).toUpperCase()}}</div>
             </template>
-            <template v-slot:cell(temp)="row">
-                <a
-                  @click="storeState(row.item, 'File Details')"
-                  href="javascript:void(0);"
-                  class="mr-3 text-primary"
-                  v-b-tooltip.hover
-                  title="Click to view"
-                >
-                  <div v-b-modal.filename-modal-standard>{{row.value.fileName}}</div>
-                </a>
-            </template>
+
+            <template v-slot:cell(action)="row">
+                  <a
+                    @click="expandKeyWord(row.item, row.item.keyword)"
+                    href="javascript:void(0);"
+                    class="mr-3 text-primary"
+                    v-b-tooltip.hover
+                    title="Click to view"
+                  >
+                  <i class=" ri-eye-fill font-size-24"></i>
+
+                  </a>
+              </template>
 
           </b-table>
         </div>

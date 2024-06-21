@@ -58,12 +58,12 @@ export const superAdminMenuItems = [{
     icon: 'ri-dashboard-line',
     link: '/reports/locations'
 },
-{
-    id: 9,
-    title: 'menuitems.tagged.text',
-    icon: 'ri-dashboard-line',
-    link: '/reports/tagged-data'
-},
+// {
+//     id: 9,
+//     title: 'menuitems.tagged.text',
+//     icon: 'ri-dashboard-line',
+//     link: '/reports/tagged-data'
+// },
 {
     id: 10,
     title: 'menuitems.timeline.text',

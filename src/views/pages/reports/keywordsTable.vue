@@ -26,6 +26,7 @@ export default {
       mfilter: null,
       mfilterOn: [],
       message:"",
+      messagObject:{},
       msortBy: "",
       msortDesc: false,
 
@@ -148,6 +149,7 @@ export default {
       console.log(row)
       this.message = row.body.replace(/\\n/g, '<br/>').replace(/\\r/g, '').replace("b'","").replace(/\\'/g, "'") ;
       this.modalTitle = row.subject;
+      this.messagObject = row;
     },
 
     async expandKeyWord(row, title){
@@ -176,6 +178,12 @@ export default {
       <b-modal size="lg" id="message-body-modal" :title="modalTitle" title-class="font-18" hide-footer>
           <div class="row">
             <div class="col-md-12">
+                <p class="mb-2 ml-5 mr-5" > From: {{messagObject.from}}</p>
+                <p class="mb-2 ml-5 mr-5" > Date: {{messagObject.date}}</p>
+                <p class="mb-2 ml-5 mr-5" > To: {{messagObject.to}}</p>
+                <p class="mb-2 ml-5 mr-5" > Cc: {{messagObject.cc}}</p>
+                <p class="mb-2 ml-5 mr-5" > Subject: {{messagObject.subject}}</p>
+                <br/>
                 <p class="mb-2 ml-5 mr-5" v-html="message"></p>
               </div>
             </div>

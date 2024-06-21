@@ -38,7 +38,7 @@ export default {
         { key: "dateAccessed", sortable: true, label:"Date" },
         { key: "location", sortable: true, label:"Location" },
         { key: "overallRating", sortable: true, label:"Rating" },
-        { key: "action",  sortable:false, label:"Action" },
+        { key: "action",  label:"Action" },
       ],
 
 
