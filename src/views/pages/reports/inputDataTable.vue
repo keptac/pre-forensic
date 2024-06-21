@@ -34,8 +34,6 @@ export default {
         { key: "size", sortable: true, label: "File Size" },
         { key: "createby", sortable: true, label: "Created By " },
         { key: "dateInitiated", sortable: true, label:"Date created" },
-        { key: "dateModified", sortable: true, label:"Date modified" },
-        { key: "dateAccessed", sortable: true, label:"Date accessed" },
       ],
 
       columns: [
@@ -172,10 +170,15 @@ export default {
 
 <template>
 
-<div>
+<div >
+  <div class="row">
+
+
 
   <!-- InternalData -->
-  <div class="card">
+  <div class=" col-md-7">
+    <div class="card">
+
 
     <b-modal id="filename-modal-standard" :title="modalTitle" title-class="font-18" hide-footer>
           <div class="row">
@@ -318,9 +321,13 @@ export default {
       </div>
     </div>
   </div>
+</div>
+
+
 
   <!-- External Data -->
-  <div class="card col-md-6">
+  <div class=" col-md-5">
+    <div class="card">
     <div class="card-body">
       <b-dropdown right toggle-class="arrow-none card-drop" class="float-right" variant="white">
         <template v-slot:button-content>
@@ -395,7 +402,9 @@ export default {
         </div>
       </div>
     </div>
+    </div>
   </div>
+</div>
 </div>
 
 </template>

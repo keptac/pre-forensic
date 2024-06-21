@@ -39,7 +39,7 @@
             "badge": "3"
         },
         "risks": {
-            "text": "Behavioural Risks",
+            "text": "Behaviour",
             "badge": "4"
         },
         "relationships": {
@@ -47,7 +47,7 @@
             "badge": "5"
         },
         "locations": {
-            "text": "Locations",
+            "text": "Location",
             "badge": "5"
         },
         "entities": {
@@ -59,7 +59,7 @@
             "badge": "7"
         },
         "timeline": {
-            "text": "Timeline of key Data",
+            "text": "Time",
             "badge": "8"
         },
         "recommendations": {

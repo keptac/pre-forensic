@@ -80,7 +80,7 @@ export default {
               <img src="@/assets/images/company_logo_emblem.png" alt height="30" />
             </span>
             <span class="logo-lg">
-              <img src="@/assets/images/company_logo.png" alt height="40" />
+              <img src="@/assets/images/internal_logo.png" alt height="40" />
             </span>
           </a>
         </div>
