@@ -119,11 +119,27 @@ export default [{
     //new routes
 
     {
+        path: '/new-cases',
+        name: 'New Case',
+        meta: { authRequired: true },
+        component: () =>
+            import ('../views/pages/new-cases/new-case')
+    },
+
+    {
         path: '/reports/input-data',
-        name: 'Remittances Report',
+        name: 'Input Data',
         meta: { authRequired: true },
         component: () =>
             import ('../views/pages/reports/inputData')
+    },
+
+    {
+        path: '/reports/all-results',
+        name: 'All Results',
+        meta: { authRequired: true },
+        component: () =>
+            import ('../views/pages/reports/allData')
     },
 
     {

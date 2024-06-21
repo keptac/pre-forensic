@@ -22,9 +22,17 @@
             "text": "Summary",
             "badge": "1"
         },
+        "newcases": {
+            "text": "New Cases",
+            "badge": "20"
+        },
         "inputdata": {
             "text": "Input Data",
             "badge": "2"
+        },
+        "allresults": {
+            "text": "All Results",
+            "badge": "21"
         },
         "keywords": {
             "text": "Keywords & Anomalies",

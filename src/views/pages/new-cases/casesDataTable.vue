@@ -1,0 +1,272 @@
+<script>
+/**
+ * InputData component
+ */
+
+import { reportService } from '../../../services/report.service';
+import inputJsonData from '../../../assets/data/case_data.json';
+
+import {
+  paymentServiceMethods,
+  notificationMethods
+} from "@/state/helpers";
+
+export default {
+  data() {
+    return {
+
+       // Internal Data
+      caseData: [],
+      variableObject:{},
+      modalTitle:"",
+      totalRows: 1,
+      currentPage: 1,
+      perPage: 5,
+      pageOptions: [5, 10],
+      filter: null,
+      filterOn: [],
+      sortBy: "dateInitiated",
+      sortDesc: false,
+      fields: [
+        { key: "caseNumber",sortable: true, label: "Case number" },
+        { key: "caseName",sortable: true, label: "Case name" },
+        { key: "caseDescription", sortable: true, label: "Case Description" },
+        { key: "createby", sortable: true, label: "Created By " },
+        { key: "dateInitiated", sortable: true, label:"Date created" },
+        { key: "staus", sortable: true, label:"Status" },
+      ],
+
+      columns: [
+        { field: "caseNumber", label: "Case number" },
+        { field: "caseName",label: "Case name" },
+        { field: "caseDescription",label: "Case Description" },
+        { field: "createby",label: "Created By" },
+        { field: "dateInitiated", label:"Date created" },
+        { field: "staus", label:"Status" },
+      ],
+      form: {
+        startDate: "",
+        endDate:""
+      },
+
+  
+
+    };
+  },
+
+  created() {
+    this.loadCaseData()
+  },
+
+  computed: {
+    /**
+     * Total no. of records
+     */
+    rows() {
+      return this.caseData.length;
+    },
+
+    notification() {
+        return this.$store ? this.$store.state.notification : null;
+      }
+  },
+  mounted() {
+    // Set the initial number of items
+    this.totalRows = this.caseData.length;
+  },
+  methods: {
+    /**
+     * Search the table data with search input
+     */
+    ...paymentServiceMethods,
+    ...notificationMethods,
+
+    onFiltered(filteredItems) {
+      this.totalRows = filteredItems.length;
+      this.currentPage = 1;
+    },
+
+    async loadCaseData() {
+        try {
+          await reportService.getAlls3Data().then(response=>{
+            if(response.responseBody.length>0){
+                this.caseData = response.responseBody;
+              }
+          });
+        } catch (error) {
+          console.log(error);
+        }
+
+        this.caseData = JSON.parse(localStorage.getItem("case_data"));
+
+        if( this.caseData == undefined){
+          this.caseData = inputJsonData;
+          localStorage.setItem('external_data_count', this.caseData.length);
+        }
+
+    },
+
+    searchInputData() {
+      this.submitted = true;
+      reportService.searchInputData(this.form).then(result=>{
+        if(result.status=="SUCCESS"){
+          this.submitted = false;
+          this.form = Object.assign({}, this.form);
+          this.caseData = [];
+          console.log(result.responseBody);
+          this.caseData = result.responseBody
+        }
+      });
+    },
+
+    storeState(object, title){
+      this.variableObject = object;
+      this.modalTitle = title;
+    },
+  }
+};
+</script>
+
+<template>
+
+<div>
+
+  <!-- InternalData -->
+   <div class="row">
+    <div class="col-md-11">
+      <div class="card">
+      <div class="card-body">
+        <b-dropdown right toggle-class="arrow-none card-drop" class="float-right" variant="white">
+          <template v-slot:button-content>
+            <i class="mdi mdi-dots-vertical"></i>
+          </template>
+          <!-- item-->
+          <b-dropdown-item>
+            <vue-excel-xlsx
+                class="btn"
+                :data="caseData"
+                :columns="columns"
+                :file-name="'InputData Report'"
+                :file-type="'xlsx'"
+                :sheet-name="''"
+                >
+                Export Report
+            </vue-excel-xlsx>
+          </b-dropdown-item>
+          <!-- item-->
+        
+        </b-dropdown>
+
+        <h4 class="card-title mb-4">Cases</h4>
+        <div class="row mt-4">
+          <div class="col-sm-12 col-md-3">
+            <div id="tickets-table_length" class="dataTables_length">
+              <label class="d-inline-flex align-items-center">
+                Show&nbsp;
+                <b-form-select v-model="perPage" size="sm" :options="pageOptions"></b-form-select>&nbsp;entries
+              </label>
+            </div>
+          </div>
+          
+          <!-- Search -->
+          <div class="col-sm-12 col-md-9">
+            <div id="tickets-table_filter" class="dataTables_filter text-md-right">
+              <label class="d-inline-flex align-items-center">
+                Search:
+                <b-form-input
+                  v-model="filter"
+                  type="search"
+                  class="form-control form-control-sm ml-2"
+                ></b-form-input>
+              </label>
+            </div>
+          </div>
+          <!-- End search -->
+        </div>
+        <div class="table-responsive">
+          <b-table
+            :items="caseData"
+            :fields="fields"
+            responsive="sm"
+            :per-page="perPage"
+            :current-page="currentPage"
+            :sort-by.sync="sortBy"
+            :sort-desc.sync="sortDesc"
+            :filter="filter"
+            :filter-included-fields="filterOn"
+            @filtered="onFiltered"
+          >
+
+            <template v-slot:cell(status)="row">
+              <div
+                class="badge font-size-14 badge-soft-success"
+                :class="{'badge-soft-danger': `${row.item.transactionDetails.transactionStatus}` === 'declined',
+                'badge-soft-success': `${row.item.transactionDetails.transactionStatus}` === 'collected',
+                'badge-soft-info': `${row.item.transactionDetails.transactionStatus}` === 'approved',
+                'badge-soft-warning': `${row.item.transactionDetails.transactionStatus}` === 'pending'}"
+              >{{row.item.transactionDetails.transactionStatus==='pending'?'Deposit Pending':row.item.transactionDetails.transactionStatus==='approved'?'Pending Collection':String(row.item.transactionDetails.transactionStatus).toUpperCase()}}</div>
+            </template>
+            <template v-slot:cell(temp)="row">
+                <a
+                  @click="storeState(row.item, 'File Details')"
+                  href="javascript:void(0);"
+                  class="mr-3 text-primary"
+                  v-b-tooltip.hover
+                  title="Click to view"
+                >
+                  <div v-b-modal.filename-modal-standard>{{row.value.fileName}}</div>
+                </a>
+            </template>
+
+          </b-table>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="dataTables_paginate paging_simple_numbers float-right">
+              <ul class="pagination pagination-rounded mb-0">
+                <!-- pagination -->
+                <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage"></b-pagination>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    
+  </div>
+
+  <div class="row">
+          <div class="col-lg-3 ">
+            <div class="card ">
+              <div class="card-body body-colored">
+                <i style="font-size: 2em; margin-bottom:20px" class="fas fa-file-alt"></i>
+                  <h5 style="color: white">Documentation</h5>
+                  <p>Everything you need to know about Liminal Clarity AI</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 ">
+            <div class="card ">
+              <div class="card-body body-colored">
+                <i style="font-size: 2em; margin-bottom:20px" class="fas fa-headset"></i>
+                  <h5 style="color: white">Support</h5>
+                  <p>Contact our technical support team to keep your case running smoothly</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 ">
+            <div class="card ">
+              <div class="card-body body-colored">
+                <i style="font-size: 2em; margin-bottom:20px" class="fas fa-graduation-cap"></i>
+                  <h5 style="color: white">Training</h5>
+                  <p>Learn more about our product through e-learning sessions</p>
+              </div>
+            </div>
+          </div>
+    </div>
+
+
+</div>
+
+</template>

@@ -28,6 +28,7 @@ export default {
         { key: "country", sortable: true, label: "Country" },
         { key: "city",sortable: true, label: "City" },
         { key: "count",sortable: true, label: "Count" },
+        {key:"action", label:"Action"}
       ],
 
       columns: [
@@ -152,6 +153,18 @@ export default {
               :filter-included-fields="filterOn"
               @filtered="onFiltered"
             >
+            <template v-slot:cell(action)="row">
+                  <a
+                    @click="expandKeyWord(row.item, row.item.keyword)"
+                    href="javascript:void(0);"
+                    class="mr-3 text-primary"
+                    v-b-tooltip.hover
+                    title="Click to view"
+                  >
+                  <i class=" ri-eye-fill font-size-24"></i>
+
+                  </a>
+              </template>
             </b-table>
           </div>
           <div class="row">

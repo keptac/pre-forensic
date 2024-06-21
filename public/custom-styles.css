@@ -82,3 +82,10 @@
       border-radius: 30px;
       border-style: solid;
     }
+
+    .body-colored{
+      background-color: #1a2545;
+      border-radius: 10px;
+      color:white;
+      text-align: center;
+    }

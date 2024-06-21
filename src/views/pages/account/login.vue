@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="text-center p-2 mt-5">
-                          <p class="font-size-20 text-muted">Sign in Liminal Clarity AI.</p>
+                          <p class="font-size-20 text-muted">Sign in Liminal Clarity AI</p>
                         </div>
   
                         <b-alert
@@ -108,7 +108,7 @@
                         >{{notification.message}}</b-alert>
                       <div class="text-center ">
                           <form class="form-horizontal justify-content-center" @submit.prevent="tryToLogIn">
-                            <div class="form-group auth-form-group-custom mb-4">
+                            <!-- <div class="form-group auth-form-group-custom mb-4">
                               <i class="ri-mail-line auti-custom-input-icon"></i>
                               <label for="email">Case number</label>
                               <input
@@ -119,7 +119,7 @@
                                 placeholder="Case Number"
                                 :class="{ 'is-invalid': submitted }"
                               />
-                            </div>
+                            </div> -->
                             <div class="form-group auth-form-group-custom mb-4">
                               <i class="ri-mail-line auti-custom-input-icon"></i>
                               <label for="email">Email</label>
@@ -158,7 +158,7 @@
                               <button
                                 class=" w-md waves-effect waves-light login-button"
                                 type="submit"
-                              >Log In</button>
+                              >Sign Into</button>
                             </div>
   
                             <!-- <div class="mt-4 text-center">

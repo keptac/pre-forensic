@@ -75,6 +75,28 @@ async function getAlls3Data() {
         localStorage.setItem('entity_data', JSON.stringify(JSON.parse(response.data.Body).slice(0,30)));
         return response;
     }).send();
+
+
+      //case_data.json
+      s3.getObject({
+        Bucket : 'preforensic-data',
+        Key: 'case_data.json'
+    }).on('success', function(response) {
+        localStorage.setItem('case_data_count', JSON.parse(response.data.Body).length);
+        localStorage.setItem('case_data', JSON.stringify(JSON.parse(response.data.Body).slice(0,30)));
+        return response;
+    }).send();
+
+
+       //all_results.json
+       s3.getObject({
+        Bucket : 'preforensic-data',
+        Key: 'all_results.json'
+    }).on('success', function(response) {
+        localStorage.setItem('all_results_count', JSON.parse(response.data.Body).length);
+        localStorage.setItem('all_results', JSON.stringify(JSON.parse(response.data.Body).slice(0,30)));
+        return response;
+    }).send();
 }
 
 async function getGlobalDashboard(id) {

@@ -36,7 +36,7 @@ export default {
         {
           title: "Locations Indentified",
           icon: "mdi mdi-finance",
-          value: "1"
+          value: "3"
         },
         {
           title: "Anomalies Detected",

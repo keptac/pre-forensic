@@ -10,10 +10,22 @@ export const superAdminMenuItems = [{
     link: '/'
 },
 {
+    id: 20,
+    title: 'menuitems.newcases.text',
+    icon: 'ri-dashboard-line',
+    link: '/new-cases'
+},
+{
     id: 3,
     title: 'menuitems.inputdata.text',
     icon: 'ri-dashboard-line',
     link: '/reports/input-data'
+},
+{
+    id: 21,
+    title: 'menuitems.allresults.text',
+    icon: 'ri-dashboard-line',
+    link: '/reports/all-results'
 },
 {
     id: 4,
@@ -64,8 +76,6 @@ export const superAdminMenuItems = [{
     icon: 'ri-dashboard-line',
     link: '/reports/recommendations'
 },
-
-
 
 
 {

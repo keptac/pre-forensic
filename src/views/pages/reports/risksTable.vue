@@ -50,6 +50,7 @@ export default {
         { key: "from_to",sortable: true, label: "From/To" },
         { key: "type",sortable: true, label: "Type(Email/Chat)" },
         { key: "description",sortable: true, label: "Risk Description" },
+        {key: "action", label:"Action"}
       ],
 
       columns: [
@@ -225,6 +226,18 @@ export default {
                     title="Click to view"
                   >
                  {{row.item.id}}
+
+                  </a>
+              </template>
+              <template v-slot:cell(action)="row">
+                  <a
+                    @click="expandKeyWord(row.item, row.item.keyword)"
+                    href="javascript:void(0);"
+                    class="mr-3 text-primary"
+                    v-b-tooltip.hover
+                    title="Click to view"
+                  >
+                  <i class=" ri-eye-fill font-size-24"></i>
 
                   </a>
               </template>
