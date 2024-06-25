@@ -4,7 +4,7 @@
  */
 
 import { reportService } from '../../../services/report.service';
-import inputJsonData from '../../../assets/data/behavior_page.json';
+import inputJsonData from '../../../assets/data/case_data.json';
 
 import {
   paymentServiceMethods,
@@ -89,22 +89,25 @@ export default {
     },
 
     async loadCaseData() {
-        try {
-          await reportService.getAlls3Data().then(response=>{
-            if(response.responseBody.length>0){
-                this.caseData = response.responseBody;
-              }
-          });
-        } catch (error) {
-          console.log(error);
-        }
+        // try {
+        //   await reportService.getAlls3Data().then(response=>{
+        //     if(response.responseBody.length>0){
+        //         this.caseData = response.responseBody;
+        //       }
+        //   });
+        // } catch (error) {
+        //   console.log(error);
+        // }
 
-        this.caseData = JSON.parse(localStorage.getItem("case_data"));
+        // this.caseData = JSON.parse(localStorage.getItem("case_data"));
 
-        if( this.caseData == undefined){
-          this.caseData = inputJsonData;
-          localStorage.setItem('external_data_count', this.caseData.length);
-        }
+        // if( this.caseData == undefined){
+        //   this.caseData = inputJsonData;
+        //   localStorage.setItem('external_data_count', this.caseData.length);
+        // }
+
+        this.caseData = inputJsonData;
+        localStorage.setItem('case_data_count', this.caseData.length);
 
     },
 

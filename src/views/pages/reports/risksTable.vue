@@ -9,7 +9,7 @@ import {
   notificationMethods
 } from "@/state/helpers";
 
-import inputJsonData from '../../../assets/data/case_data.json';
+import inputJsonData from '../../../assets/data/behavior_page.json';
 
 export default {
   data() {
@@ -47,38 +47,35 @@ export default {
       sortBy: "id",
       sortDesc: false,
       fields: [
-        { key: "id", sortable: true, label: "Identifier" },
-        { key: "date", sortable: true, label: "Date" },
-        { key: "from_to",sortable: true, label: "From/To" },
-        { key: "type",sortable: true, label: "Type(Email/Chat)" },
-        { key: "description",sortable: true, label: "Risk Description" },
+        { key: "Identifier", sortable: true, label: "Identifier" },
+        { key: "Date", sortable: true, label: "Date" },
+        { key: "From/To",sortable: true, label: "From/To" },
+        { key: "Type(Email/Chat)",sortable: true, label: "Type(Email/Chat)" },
+        { key: "Risk Description",sortable: true, label: "Risk Description" },
         {key: "action", label:"Action"}
       ],
 
       columns: [
-        { field: "date", label: "Date" },
-        { field: "from_to", label: "From/To" },
-        { field: "type", label: "Type(Email/Chat)" },
-        { field: "description", label: "Risk Description" },
+        { field: "Date", label: "Date" },
+        { field: "From/To", label: "From/To" },
+        { field: "Type(Email/Chat)", label: "Type(Email/Chat)" },
+        { field: "Risk Description", label: "Risk Description" },
       ],
 
 
       expandedFields: [
-        { key: "id", sortable: true, label: " Identifier" },
-        { key: "date",sortable: true, label: "Date" },
-        { key: "from_to", sortable: true, label: "From/To" },
-        { key: "subject", sortable:true, label:"Subject" },
-        { key: "riskRating", sortable: true, label: "Risk Rating" },
-        { key: "location", sortable: true, label: "Location" }
+      { key: "Identifier", sortable: true, label: "Identifier" },
+        { key: "Date", sortable: true, label: "Date" },
+        { key: "From/To",sortable: true, label: "From/To" },
+        { key: "Type(Email/Chat)",sortable: true, label: "Type(Email/Chat)" },
+        { key: "Risk Description",sortable: true, label: "Risk Description" },
       ],
 
       mcolumns: [
-        { field: "id", label: " ID" },
-        { field: "date", label: " date" },
-        { field: "from_to",label: "from_to " },
-        { field: "subject", label: "subject" },
-        { field: "riskRating", label: "riskRating" },
-        { field: "location", label:"location" },
+        { field: "Date", label: "Date" },
+        { field: "From/To", label: "From/To" },
+        { field: "Type(Email/Chat)", label: "Type(Email/Chat)" },
+        { field: "Risk Description", label: "Risk Description" },
       ],
       
     };
@@ -212,7 +209,7 @@ export default {
           </div>
           <div class="table-responsive">
             <b-table
-              :items="inputJsonData"
+              :items="riskData"
               :fields="fields"
               responsive="sm"
               :per-page="perPage"
