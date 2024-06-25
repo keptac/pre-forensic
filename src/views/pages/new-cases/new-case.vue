@@ -3,6 +3,7 @@ import Layout from "../../layouts/main";
 import PageHeader from "@/components/page-header";
 import recommendationsJsonData from '../../../assets/data/recommendations.json';
 import CasesDataTable from "./casesDataTable.vue";
+import NewCaseForm from "./new-case-form.vue";
 /**
  * Starter page component
  */
@@ -11,15 +12,26 @@ export default {
     title: "New Case",
     meta: [{ name: "description" }]
   },
-  components: { Layout, PageHeader, CasesDataTable },
+  components: { Layout, PageHeader, CasesDataTable, NewCaseForm },
   data() {
     return {
       title: "Case Management",
       caseNumber:JSON.parse(localStorage.getItem("recommendations"))==undefined?recommendationsJsonData[0].caseNumber: JSON.parse(localStorage.getItem("recommendations"))[0].caseNumber,
-      items: []
+      items: [],
+      displayNewCaseForm:false
     };
+  },
+
+  methods:{
+    showForm(){
+        this.displayNewCaseForm = !this.displayNewCaseForm ;
+      }
   }
-};
+}
+
+
+
+
 </script>
 
 <template>
@@ -33,17 +45,27 @@ export default {
               <p>A case must be created per individual to be analysed. A case houses the briefing, data and reported findings of an investigation file.
                 You can also be invited to collaborate on an existing case. Contact the case administrator to receive an invitation in your account.
                 </p>
-                <button class="btn btn-primary" type="submit">Add new case</button>
+                <button class="btn btn-primary" type="submit" @click="showForm()">Add new case</button>
             </div>
           </div>
         </div>
 
     </div>
-      <div class="row">
-        <div class="col-lg-12 ">
-          <CasesDataTable/>
+      <div class="row" v-if="displayNewCaseForm">
+          <div class="col-lg-12 ">
+            <NewCaseForm/>
+          </div>
         </div>
-      </div>
+
+      <div class="row" v-if="!displayNewCaseForm">
+          <div class="col-lg-12 ">
+            <CasesDataTable/>
+          </div>
+        </div>
+
+      
+
+      
 
   </Layout>
 </template>

@@ -9,10 +9,12 @@ import {
   notificationMethods
 } from "@/state/helpers";
 
+import inputJsonData from '../../../assets/data/case_data.json';
+
 export default {
   data() {
     return {
-      riskData: [
+      riskData:  [
         { "id":"",
           "date":"", 
           "from_to":"", 
@@ -83,7 +85,9 @@ export default {
   },
 
   created() {
-    this.loadAllTransactions()
+    // this.loadAllTransactions()
+
+    this.riskData = inputJsonData;
   },
 
   computed: {
@@ -93,6 +97,8 @@ export default {
     rows() {
       return this.riskData.length;
     },
+
+
 
     mrows() {
       return this.transactionsObject.length;
@@ -206,7 +212,7 @@ export default {
           </div>
           <div class="table-responsive">
             <b-table
-              :items="riskData"
+              :items="inputJsonData"
               :fields="fields"
               responsive="sm"
               :per-page="perPage"

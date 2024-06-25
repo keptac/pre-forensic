@@ -4,7 +4,7 @@
  */
 
 import { reportService } from '../../../services/report.service';
-import inputJsonData from '../../../assets/data/case_data.json';
+import inputJsonData from '../../../assets/data/behavior_page.json';
 
 import {
   paymentServiceMethods,

@@ -1,14 +1,16 @@
-[      {
-    "dateInitiated":"",
-    "description":"",
-    "datatype":"",
-    "createby":"",
-    "relationship":"",
-    "behaviour":"",
-    "context":"",
-    "time":"",
-    "location":"",
-    "overallRating":"",
-    "fileName":"",
-    "any other fields":""
-  }]
+[
+    {
+      "dateInitiated": "2097444",
+      "description": "Project Enron",
+      "datatype": ".pst",
+      "createby": "Nick Lamb",
+      "relationship": "",
+      "behaviour": "",
+      "context": "",
+      "time": "2022/06/06",
+      "location": "SOuth Africa",
+      "overallRating": "8.3",
+      "fileName": "Enron Analysis"
+     
+    }
+  ]

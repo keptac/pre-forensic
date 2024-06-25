@@ -1,16 +1,11 @@
-[{
-    "caseNumber": "ENR1029",
-    "caseName": "Jeff Skilling",
-    "caseDescription": "Project Enron",
-    "createby": "Nick Lamb",
-    "dateInitiated": "06/06/2024",
-    "status": "Ready to view"
-},
-{
-    "caseNumber": "ENR1028",
-    "caseName": "Ken Lay",
-    "caseDescription": "Project Enron",
-    "createby": "Nick Lamb",
-    "dateInitiated": "06/06/2024",
-    "status": "Processing in progress"
-}]
+[
+    {
+      "caseNumber": "ENR1029",
+      "caseName": "Kenneth Lay",
+      "caseDescription": "Project Enron",
+      "createby": "Nick Lamb",
+      "dateInitiated": "06/06/2024",
+      "staus": "Ready to view"
+    }
+   
+  ]

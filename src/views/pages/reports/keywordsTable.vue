@@ -122,22 +122,26 @@ export default {
 
     async loadAllKeywords() {
         
-      try {
-          await reportService.getAlls3Data().then(response=>{
-            if(response.responseBody.length>0){
-                this.keywordsData = response.responseBody;
-              }
-          });
-        } catch (error) {
-          console.log(error);
-        }
+      // try {
+      //     await reportService.getAlls3Data().then(response=>{
+      //       if(response.responseBody.length>0){
+      //           this.keywordsData = response.responseBody;
+      //         }
+      //     });
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
 
-        this.keywordsData = JSON.parse(localStorage.getItem("keyword_data"))
+      //   this.keywordsData = JSON.parse(localStorage.getItem("keyword_data"))
 
-        if( this.keywordsData == undefined){
-          this.keywordsData = keywordsJsonData;
-          localStorage.setItem('keyword_data_count', this.keywordsData.length);
-        }
+      //   if( this.keywordsData == undefined){
+      //     this.keywordsData = keywordsJsonData;
+      //     localStorage.setItem('keyword_data_count', this.keywordsData.length);
+      //   }
+
+
+        this.keywordsData = keywordsJsonData;
+        localStorage.setItem('keyword_data_count', this.keywordsData.length);
     },
 
     closeKeyWord(){
