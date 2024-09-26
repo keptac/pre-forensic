@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="text-center p-2 mt-5">
-                          <p class="font-size-20 text-muted">Sign in Liminal Clarity AI</p>
+                          <p class="font-size-20 text-muted">Sign into Liminal Clarity AI</p>
                         </div>
   
                         <b-alert

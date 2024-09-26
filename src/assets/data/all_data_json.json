@@ -4,11 +4,11 @@
       "description": "Project Enron",
       "datatype": ".pst",
       "createby": "Nick Lamb",
-      "relationship": "",
-      "behaviour": "",
-      "context": "",
+      "relationship": "7.0",
+      "behaviour": "8.5",
+      "context": "7.0",
       "time": "2022/06/06",
-      "location": "SOuth Africa",
+      "location": "South Africa",
       "overallRating": "8.3",
       "fileName": "Enron Analysis"
      

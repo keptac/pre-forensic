@@ -13,7 +13,7 @@ export const actions = {
 
         if(email=="adam@preforensic.co.za"){
             localStorage.setItem('access_token', JSON.stringify("TEST TOKEN"));
-            localStorage.setItem('user', JSON.stringify({id: -1, nationalId: "0000000000001", firstName: "Adam", lastName: "The 1st User"}));
+            localStorage.setItem('user', JSON.stringify({id: -1, nationalId: "0000000000001", firstName: "Nick", lastName: "Lamb"}));
             router.push('/');
         }
 

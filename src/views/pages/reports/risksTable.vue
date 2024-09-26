@@ -52,6 +52,7 @@ export default {
         { key: "From/To",sortable: true, label: "From/To" },
         { key: "Type(Email/Chat)",sortable: true, label: "Type(Email/Chat)" },
         { key: "Risk Description",sortable: true, label: "Risk Description" },
+        { key: "Risk Behaviour",sortable: true, label: "Behaviour AI" },
         {key: "action", label:"Action"}
       ],
 
@@ -179,7 +180,7 @@ export default {
 <template>
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div class="card">
         <div class="card-body">
           <div class="row mt-4"> 
@@ -260,7 +261,7 @@ export default {
       </div>
     </div>
     
-    <div v-if="showExpanded" class="col-md-6">
+    <div v-if="showExpanded" class="col-md-4">
       <div class=" card">
         <div class="card-body">
 

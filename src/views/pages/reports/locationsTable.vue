@@ -28,6 +28,7 @@ export default {
         { key: "country", sortable: true, label: "Country" },
         { key: "city",sortable: true, label: "City" },
         { key: "count",sortable: true, label: "Count" },
+        { key: "locationAi",sortable: true, label: "Location AI" },
         {key:"action", label:"Action"}
       ],
 

@@ -26,6 +26,7 @@ export default {
         { key: "id", sortable: true, label: "id" },
         { key: "date", sortable: true, label: "Date" },
         { key: "count",sortable: true, label: "Count" },
+        { key: "timeAI",sortable: true, label: "Time AI" },
         {key:"action", label:"Action"}
       ],
 

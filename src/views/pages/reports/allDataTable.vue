@@ -4,7 +4,7 @@
  */
 
 import { reportService } from '../../../services/report.service';
-import inputJsonData from '../../../assets/data/input_internal_data_json.json';
+import inputJsonData from '../../../assets/data/all_data_json.json';
 
 import {
   paymentServiceMethods,
@@ -30,14 +30,14 @@ export default {
       fields: [
         { key: "fileName", sortable: true, label:"File Name" },
         { key: "description",sortable: true, label: "Description" },
-        { key: "datatype",sortable: true, label: "Data type" },
+        // { key: "datatype",sortable: true, label: "Data type" },
         { key: "createby", sortable: true, label: "Created By" },
-        { key: "relationship", sortable: true, label: "Relationship" },
-        { key: "behaviour", sortable: true, label:"Behavior" },
-        { key: "context", sortable: true, label:"Context" },
-        { key: "dateAccessed", sortable: true, label:"Date" },
-        { key: "location", sortable: true, label:"Location" },
-        { key: "overallRating", sortable: true, label:"Rating" },
+        { key: "relationship", sortable: true, label: "Relationship AI" },
+        { key: "behaviour", sortable: true, label:"Behaviour AI" },
+        { key: "context", sortable: true, label:"Context AI" },
+        { key: "time", sortable: true, label:"Time AI" },
+        { key: "location", sortable: true, label:"Location AI" },
+        { key: "overallRating", sortable: true, label:"Overall AI rating" },
         { key: "action",  label:"Action" },
       ],
 
@@ -96,23 +96,25 @@ export default {
     },
 
     async loadAllInputData() {
-        try {
-          await reportService.getAlls3Data().then(response=>{
-            if(response.responseBody.length>0){
-                this.allData = response.responseBody;
-              }
-          });
-        } catch (error) {
-          console.log(error);
-        }
+        // try {
+        //   await reportService.getAlls3Data().then(response=>{
+        //     if(response.responseBody.length>0){
+        //         this.allData = response.responseBody;
+        //       }
+        //   });
+        // } catch (error) {
+        //   console.log(error);
+        // }
 
-        this.allData = JSON.parse(localStorage.getItem("all_results"));
+        // this.allData = JSON.parse(localStorage.getItem("all_results"));
 
-        if( this.allData == undefined){
-          this.allData = inputJsonData;
-          localStorage.setItem('all_results_count', this.allData.length);
-        }
-
+        // if( this.allData == undefined){
+        //   this.allData = inputJsonData;
+        //   localStorage.setItem('all_results_count', this.allData.length);
+        // }
+        
+        this.allData = inputJsonData;
+        localStorage.setItem('all_results_count', this.allData.length);
     },
 
     searchInputData() {

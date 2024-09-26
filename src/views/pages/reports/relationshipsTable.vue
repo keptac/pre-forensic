@@ -40,13 +40,13 @@ export default {
       sortDesc: false,
       fields: [
         { key: "Identifier", sortable: true, label: "Identifier" },
-        { key: "DateRange", sortable: true, label: "Date Range" },
+        // { key: "DateRange", sortable: true, label: "Date Range" },
         { key: "InternalExternal",sortable: true, label: "Internal/External" },
         { key: "IdCompanyRegNumber",sortable: true, label: "Reg Number" },
         // { key: "Riskrating",sortable: true, label: "Risk Rating" },
-        { key: "SupplierNumber",sortable: true, label: "Supplier Number" },
+        { key: "relationshipAi",sortable: true, label: "Relationship AI" },
         { key: "InteractionCount",sortable: true, label: "Interation Count" },
-        {key: "action", label:"Action"}
+        {key: "action", label:"View Interactions"}
       ],
 
       columns: [
