@@ -52,7 +52,7 @@ export default {
         { key: "From/To",sortable: true, label: "From/To" },
         { key: "Type(Email/Chat)",sortable: true, label: "Type(Email/Chat)" },
         { key: "Risk Description",sortable: true, label: "Risk Description" },
-        { key: "Risk Behaviour",sortable: true, label: "Behaviour AI" },
+        { key: "Behaviour AI",sortable: true, label: "Behaviour AI" },
         {key: "action", label:"Action"}
       ],
 
