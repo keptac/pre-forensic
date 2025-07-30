@@ -111,12 +111,20 @@ export default [{
             authRequired: true,
         },
         component: () =>
-            import ('../views/pages/dashboard/index')
+            import ('../views/pages/dashboard-new/index')
     },
 
 
 
     //new routes
+
+        {
+        path: '/view-cases',
+        name: 'New Case',
+        meta: { authRequired: true },
+        component: () =>
+            import ('../views/pages/case-view/case-view')
+    },
 
     {
         path: '/new-cases',

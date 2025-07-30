@@ -11,12 +11,11 @@ export const actions = {
     
     login({ dispatch, commit }, { email, password }) {
 
-        if(email=="adam@preforensic.co.za"){
+        if(email=="adam@liminal.co.za"){
             localStorage.setItem('access_token', JSON.stringify("TEST TOKEN"));
             localStorage.setItem('user', JSON.stringify({id: -1, nationalId: "0000000000001", firstName: "Nick", lastName: "Lamb"}));
             router.push('/');
         }
-
 
         commit('loginRequest', { email });
 

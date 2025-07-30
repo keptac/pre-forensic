@@ -73,12 +73,12 @@
                         </div>
                         <div class="mt-5 text-center">
                           <p>
-                            © 2023 Pre-Forensic.
+                            © 2025 Liminal.
                           </p>
                         </div>
                         <div class="mt-3 text-center">
                           <p>
-                            v0.1.0-beta
+                            v0.2.0-beta
                           </p>
                         </div>
                       </div>

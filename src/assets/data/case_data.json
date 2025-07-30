@@ -1,10 +1,18 @@
 [
     {
-      "caseNumber": "ENR1029",
-      "caseName": "Kenneth Lay",
-      "caseDescription": "Project Enron",
+      "caseNumber": "C15",
+      "caseName": "Jane Doe",
+      "caseDescription": "Timesheet Fraud",
       "createby": "Nick Lamb",
-      "dateInitiated": "06/06/2024",
+      "dateInitiated": "13/07/2025",
+      "staus": "Ready to view"
+    },
+        {
+      "caseNumber": "C42",
+      "caseName": "G. Lekgoro",
+      "caseDescription": "Asset misuse",
+      "createby": "Nick Lamb",
+      "dateInitiated": "13/07/2025",
       "staus": "Ready to view"
     }
    

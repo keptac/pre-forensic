@@ -1,0 +1,90 @@
+[
+  {
+    "fraudType": "Procurement Kickbacks",
+    "entity": "Acme Procurement",
+    "riskScore": "70",
+    "confidence": "Medium",
+    "summary": "Vendor received repeated contracts despite 40% higher pricing",
+    "status": "Pending review"
+  },
+  {
+    "fraudType": "Collusion with vendors",
+    "entity": "Procurement Officer & XYZ Trading",
+    "riskScore": "82",
+    "confidence": "High",
+    "summary": "Personal connection uncovered via emails and LinkedIn",
+    "status": "Pending review"
+  },
+  {
+    "fraudType": "Conflict of Interest",
+    "entity": "S. Williams",
+    "riskScore": "73",
+    "confidence": "Medium",
+    "summary": "Director’s spouse is vendor CEO; not disclosed",
+    "status": "Pending review"
+  },
+  {
+    "fraudType": "Price Fixing or Collusion Among Suppliers",
+    "entity": "Bidders A, B, and C",
+    "riskScore": "81",
+    "confidence": "High",
+    "summary": "Tender bids have identical language and structure",
+    "status": "Pending review"
+  },
+  {
+    "fraudType": "Impersonation or Phishing Attacks",
+    "entity": "Fake XYZ Vendor",
+    "riskScore": "93",
+    "confidence": "High",
+    "summary": "Changed bank account details via fake domain",
+    "status": "Pending review"
+  },
+  {
+    "fraudType": "Ghost Employees",
+    "entity": "Jane Doe",
+    "riskScore": "90",
+    "confidence": "High",
+    "summary": "Three salaries paid to nonexistent IDs with no login activity",
+    "status": "Under investigation"
+  },
+  {
+    "fraudType": "Timesheet Fraud",
+    "entity": "Peter Maluleka",
+    "riskScore": "80",
+    "confidence": "High",
+    "summary": "Logged 9 hours daily, but no login/access past 2PM",
+    "status": "Pending review"
+  },
+  {
+    "fraudType": "Asset Misuse",
+    "entity": "G. Lekgoro",
+    "riskScore": "76",
+    "confidence": "Medium",
+    "summary": "Company car used for personal trips over weekends",
+    "status": "Under investigation"
+  },
+  {
+    "fraudType": "Inventory Theft",
+    "entity": "Warehouse Staff",
+    "riskScore": "78",
+    "confidence": "High",
+    "summary": "Inventory reduced, no sales/returns documented",
+    "status": "Pending review"
+  },
+  {
+    "fraudType": "Short Shipment",
+    "entity": "JBC Logistics",
+    "riskScore": "74",
+    "confidence": "Medium",
+    "summary": "Delivered 200kg vs invoiced 500kg",
+    "status": "Pending review"
+  },
+  {
+    "fraudType": "Overbilling",
+    "entity": "Alpha Supplies",
+    "riskScore": "84",
+    "confidence": "High",
+    "summary": "Charged R100,000 over agreed service contract",
+    "status": "Closed"
+  }
+]
