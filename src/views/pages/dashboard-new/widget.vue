@@ -89,7 +89,7 @@ export default {
           <div class="media">
             <div class="media-body overflow-hidden">
               <p class="text-truncate font-size-14 mb-2">{{data.title}}</p>
-              <h5 class="mb-0">{{data.value}}</h5>
+              <h5 class="mb-0 font-size-28">{{data.value}}</h5>
             </div>
             <div class="text-primary">
               <i :class="`${data.icon} font-size-20`"></i>

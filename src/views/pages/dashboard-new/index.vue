@@ -55,11 +55,18 @@ export default {
       <div class="col-xl-6">
         <!-- <EventOvertime/> -->
         <EventOvertime/>
-         <RiskScorebar />
+        
+    
       </div>
       <div class="col-xl-6">
-        <BusinessConditions />
+             <RiskScorebar />
+  
       </div>
     </div>
+    <div class="row">
+      <div class="col-xl-12">
+        <BusinessConditions />
+      </div>
+      </div>
   </Layout>
 </template>

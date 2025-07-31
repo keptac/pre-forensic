@@ -83,14 +83,23 @@ export default {
 
 <template>
 
-      <div class="card">
-        <div class="card-body">
-          <chartist
-              ratio="ct-chart"
-              :data="simpleBarChart.data"
-              :options="simpleBarChart.options"
-              type="Bar"
-            ></chartist>
-        </div>
+<div class="card">
+  <div class="card-body">
+    <h5 class="chart-title" style="text-align:center; margin-bottom: 20px;">Risk scores</h5>
+    <div class="chart-container" style="position: relative;">
+      <!-- Y Axis Label -->
+      <div class="y-axis-label" style="position: absolute; left: -40px; top: 50%; transform: translateY(-50%) rotate(-90deg); font-weight: bold;">Risk Score</div>
+      <chartist
+        ratio="ct-chart"
+        :data="simpleBarChart.data"
+        :options="simpleBarChart.options"
+        type="Bar"
+        class="custom-bar-width"
+      ></chartist>
+      <!-- X Axis Label -->
+      <div class="x-axis-label" style="text-align: center; margin-top: 10px; font-weight: bold;">Score Range</div>
+    </div>
   </div>
+</div>
+
 </template>

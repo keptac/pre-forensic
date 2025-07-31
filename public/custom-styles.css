@@ -89,3 +89,35 @@
       color:white;
       text-align: center;
     }
+
+
+
+.sidebar-flex {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.sidebar-flex-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.sidebar-content {
+  flex: 1 1 auto;
+}
+.sidebar-bottom-image {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.active-menu {
+  background: #f5f6fa !important;
+  color: #1A2545 !important;
+  border-radius: 8px;
+  margin: 10px;
+}
+
+.custom-bar-width .ct-bar {
+  stroke-width: 90px !important;
+}

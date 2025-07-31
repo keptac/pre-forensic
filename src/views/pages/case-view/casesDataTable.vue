@@ -4,7 +4,6 @@
  */
 
 import { reportService } from '../../../services/report.service';
-import inputJsonData from '../../../assets/data/case_data.json';
 
 import {
   paymentServiceMethods,
@@ -12,13 +11,18 @@ import {
 } from "@/state/helpers";
 
 export default {
+  props: {
+    caseData: {
+      type: Array,
+      required: true
+    }
+  },
   data() {
     return {
-
-       // Internal Data
-      caseData: [],
-      variableObject:{},
-      modalTitle:"",
+      // Internal Data
+      variableObject: {},
+      selectedAlert: {},
+      modalTitle: "",
       totalRows: 1,
       currentPage: 1,
       perPage: 5,
@@ -28,36 +32,40 @@ export default {
       sortBy: "dateInitiated",
       sortDesc: false,
       fields: [
-        { key: "caseNumber",sortable: true, label: "Case number" },
-        { key: "caseName",sortable: true, label: "Employee/Vendor name" },
+        { key: "caseNumber", sortable: true, label: "Case number" },
+        { key: "caseName", sortable: true, label: "Employee/Vendor name" },
         { key: "caseDescription", sortable: true, label: "Case Description" },
         { key: "createby", sortable: true, label: "Investigator" },
-        { key: "dateInitiated", sortable: true, label:"Date created" },
-        // { key: "status", sortable: true, label:"Status" },
-        { key: "action", sortable:false, label:"Action"}
-
+        { key: "dateInitiated", sortable: true, label: "Date created" },
+        { key: "internalOrExternal", sortable: true, label: "Internal/External" },
+        // { key: "status", sortable: true, label: "Status" },
+        { key: "action", sortable: false, label: "Action" }
       ],
-
       columns: [
         { field: "caseNumber", label: "Case number" },
-        { field: "caseName",label: "Case name" },
-        { field: "caseDescription",label: "Case Description" },
-        { field: "createby",label: "Created By" },
-        { field: "dateInitiated", label:"Date created" },
-        { field: "status", label:"Status" }
+        { field: "caseName", label: "Case name" },
+        { field: "caseDescription", label: "Case Description" },
+        { field: "createby", label: "Created By" },
+        { field: "dateInitiated", label: "Date created" },
+        { field: "internalOrExternal", label: "Internal/External" },
+        { field: "status", label: "Status" }
       ],
       form: {
         startDate: "",
-        endDate:""
+        endDate: ""
       },
-
-  
-
+      // File viewer modal state
+      fileViewerUrl: '',
+      fileViewerType: '',
+      fileViewerTitle: '',
+      fileViewerContent: '',
+      // New form fields
+      notesInput: '',
+      statusInput: '',
+      examinerInput: '',
+      statusOptions: ['Under investigation', 'Closed', 'Pending review', 'Open'],
+      examinerOptions: ['Nick Lamb', 'Andre Loots', 'Kelvin Chelenje'],
     };
-  },
-
-  created() {
-    this.loadCaseData()
   },
 
   computed: {
@@ -67,15 +75,16 @@ export default {
     rows() {
       return this.caseData.length;
     },
-
     notification() {
-        return this.$store ? this.$store.state.notification : null;
-      }
+      return this.$store ? this.$store.state.notification : null;
+    }
   },
+
   mounted() {
     // Set the initial number of items
     this.totalRows = this.caseData.length;
   },
+
   methods: {
     /**
      * Search the table data with search input
@@ -88,31 +97,28 @@ export default {
       this.currentPage = 1;
     },
 
-    async loadCaseData() {
-        // try {
-        //   await reportService.getAlls3Data().then(response=>{
-        //     if(response.responseBody.length>0){
-        //         this.caseData = response.responseBody;
-        //       }
-        //   });
-        // } catch (error) {
-        //   console.log(error);
-        // }
-
-        // this.caseData = JSON.parse(localStorage.getItem("case_data"));
-
-        // if( this.caseData == undefined){
-        //   this.caseData = inputJsonData;
-        //   localStorage.setItem('external_data_count', this.caseData.length);
-        // }
-
-        this.caseData = inputJsonData;
-        localStorage.setItem('case_data_count', this.caseData.length);
-
+    submitCaseUpdate() {
+      // Update selectedAlert fields
+      if (!this.selectedAlert) return;
+      // Update fields as requested
+      this.selectedAlert.createby = this.examinerInput || this.selectedAlert.createby;
+      this.selectedAlert.caseExaminerNotes = this.notesInput || this.selectedAlert.caseExaminerNotes;
+      this.selectedAlert.status = this.statusInput || this.selectedAlert.status;
+      // Find and update in caseData
+      const idx = this.caseData.findIndex(c => c.caseNumber === this.selectedAlert.caseNumber);
+      if (idx !== -1) {
+        this.$set(this.caseData, idx, { ...this.selectedAlert });
+        // Simulate saving to localStorage (replace with API/file save as needed)
+        localStorage.setItem('case_data', JSON.stringify(this.caseData));
+      }
+      this.$bvModal.msgBoxOk('Case updated successfully!', { title: 'Success' });
     },
+
+    // loadCaseData removed; now handled by parent
 
       saveBody(row){
       console.log(row)
+      this.selectedAlert = row;
     },
 
     searchInputData() {
@@ -132,6 +138,18 @@ export default {
       this.variableObject = object;
       this.modalTitle = title;
     },
+
+    downloadExaminerNotes(filePath) {
+      // filePath should be a string path to the resource
+      const link = document.createElement('a');
+      link.href = filePath;
+      // Try to extract filename from path
+      const filename = filePath.split('/').pop() || 'downloaded-file';
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    },
   }
 };
 </script>
@@ -148,7 +166,7 @@ export default {
               <h5>Case Summary</h5>
             </div>
             <div class="card-body">
-              <p>LLM Generated Summary goes here<br/> Contains Actors involved</p>
+              <p>{{selectedAlert.summary}}</p>
             </div>
             
           </div>
@@ -159,37 +177,33 @@ export default {
               <h5>Events timeline</h5>
             </div>
             <div class="card-body">
-              <p class="text-center">LLM Generate Timeline with risk explanation</p>
+              <p class="text-center">30 Jul 2025 19:10:00 CAT</p>
             </div>
           </div>
         </div>
       </div>
         <div class="row ">
-          <div class="col-lg-3 ">
-            <div class="card ">
-              <div class="card-body body-colored">
-                <i style="font-size: 2em; margin-bottom:20px" class="fas fa-file-alt"></i>
-                  <h5 style="color: white">Examiner notes</h5>
-              </div>
-            </div>
+          <div class="col-lg-12">
+            <p>Documents Description: {{ selectedAlert.supportingDocuments }}</p>
           </div>
-          <div class="col-lg-3 ">
+          
+          <div class="col-lg-4 ">
             <div class="card ">
-              <div class="card-body body-colored">
+              <div class="card-body body-colored" style="cursor:pointer" @click="downloadExaminerNotes(selectedAlert.caseEmails)">
                 <i style="font-size: 2em; margin-bottom:20px" class="fas fa-envelope"></i>
                   <h5 style="color: white">Emails</h5>
               </div>
             </div>
           </div>
-          <div class="col-lg-3 ">
+          <div class="col-lg-4 ">
             <div class="card ">
-              <div class="card-body body-colored">
+              <div class="card-body body-colored" style="cursor:pointer" @click="downloadExaminerNotes(selectedAlert.caseSystemLogs)">
                 <i style="font-size: 2em; margin-bottom:20px" class="fas fa-file-alt"></i>
                   <h5 style="color: white">System Logs</h5>
               </div>
             </div>
           </div>
-          <div class="col-lg-3 ">
+          <div class="col-lg-4 ">
             <div class="card ">
               <div class="card-body body-colored">
                 <i style="font-size: 2em; margin-bottom:20px" class="fas fa-download"></i>
@@ -197,7 +211,43 @@ export default {
               </div>
             </div>
           </div>
+
+          
           </div> 
+
+
+                      <!-- Case Update Form -->
+            <div class="card col-md-12">
+              <div class="card-header"><h5>Update Case</h5></div>
+              <div class="card-body">
+                <form @submit.prevent="submitCaseUpdate" class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="notesInput">Notes</label>
+                      <textarea id="notesInput" v-model="notesInput" class="form-control" rows="2" placeholder="Enter notes"></textarea>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label for="statusInput">Status</label>
+                      <select id="statusInput" v-model="statusInput" class="form-control">
+                        <option value="" disabled>Select status</option>
+                        <option v-for="opt in statusOptions" :key="opt" :value="opt">{{ opt }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <label for="examinerInput">Examiner</label>
+                    <select id="examinerInput" v-model="examinerInput" class="form-control">
+                      <option value="" disabled>Select examiner</option>
+                      <option v-for="opt in examinerOptions" :key="opt" :value="opt">{{ opt }}</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btn btn-success">Submit</button>
+                </form>
+              </div>
+            </div>
+
     </b-modal>
 
 
